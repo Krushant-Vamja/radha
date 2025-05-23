@@ -89,6 +89,17 @@ const Hero = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
+        <div
+          className="hidden md:block absolute -top-70 left-1/2 transform -translate-x-1/2 w-24 xs:w-28 sm:w-32 md:w-40 lg:w-48 xl:w-56 2xl:w-120 h-24 xs:h-28 sm:h-32 md:h-40 lg:h-48 xl:h-56 2xl:h-120 rounded-full z-20"
+          style={{
+            backgroundImage: `radial-gradient(
+      circle at center, 
+      rgba(0, 121, 191, 0.5) 0%, 
+      rgba(0, 121, 191, 0) 70%
+    )`,
+            filter: "blur(50px)", // Adjust the blur radius as needed (e.g., 10px)
+          }}
+        ></div>
         {/* Background decorative elements */}
         <div className="hidden md:block inset-0 z-0 overflow-hidden">
           <div className="hidden md:block absolute md:text-[50px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] font-bold text-transparent bg-gradient-to-r from-black/20 md:top-13 lg:top-48 xl:top-60 2xl:top-30 left-10 sm:left-20 md:left-30 lg:left-40 xl:left-48 2xl:left-56 overflow-hidden bg-clip-text">

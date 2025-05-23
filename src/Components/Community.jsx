@@ -498,7 +498,7 @@ const Community = () => {
 
                   {/* Right part - Content */}
                   <div
-                    className="w-full md:w-1/2 flex flex-col justify-center relative md:pl-20 px-6 py-16 overflow-hidden"
+                    className="w-full md:w-1/2 flex flex-col h-full justify-center relative md:pl-20 px-6 py-16 overflow-hidden"
                     style={{ backgroundColor: slide.bgColor }}
                   >
                     {/* Low opacity header - Removed hidden class */}
