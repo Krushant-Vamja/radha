@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+
+
+
+/* Hide scrollbar for Webkit, Firefox, and Edge */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  @keyframes spin-slow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .rotate-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 2s ease-out forwards;
+  }
+  
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 1s ease-out forwards;
+  }
+  
+  
+  /* h1, h2, h3 {
+  font-family: 'David Libre', David Libre;
+}
+p {
+  font-family: 'poppins', poppins;
+} */
+
+/* Hand pointer on buttons/links */
+button, a {
+  cursor: pointer;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;
+}
