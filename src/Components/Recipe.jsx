@@ -197,7 +197,7 @@ const Recipe = () => {
         <img
           src={broccoli}
           alt="Broccoli"
-          className="absolute left-50 bottom-90 w-28 md:w-40 z-10 custom-float hidden md:block"
+          className="absolute left-40 bottom-90 w-28 md:w-40 z-10 custom-float hidden md:block"
         />
 
         <div className="text-center mb-25 px-4 relative z-20">

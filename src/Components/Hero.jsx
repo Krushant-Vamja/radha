@@ -90,31 +90,31 @@ const Hero = () => {
         }}
       >
         <div
-          className="hidden md:block absolute -top-70 left-1/2 transform -translate-x-1/2 w-24 xs:w-28 sm:w-32 md:w-40 lg:w-48 xl:w-56 2xl:w-120 h-24 xs:h-28 sm:h-32 md:h-40 lg:h-48 xl:h-56 2xl:h-120 rounded-full z-20"
+          className="hidden md:block absolute -top-80 left-1/2 transform -translate-x-1/2 w-24 xs:w-28 sm:w-32 md:w-40 lg:w-48 xl:w-56 2xl:w-120 h-24 xs:h-28 sm:h-32 md:h-40 lg:h-48 xl:h-56 2xl:h-120 rounded-full z-20"
           style={{
             backgroundImage: `radial-gradient(
       circle at center, 
       rgba(0, 121, 191, 0.5) 0%, 
-      rgba(0, 121, 191, 0) 70%
+      rgba(0, 121, 191, 0) 100%
     )`,
-            filter: "blur(50px)", // Adjust the blur radius as needed (e.g., 10px)
+            filter: "blur(100px)", // Adjust the blur radius as needed (e.g., 10px)
           }}
         ></div>
         {/* Background decorative elements */}
         <div className="hidden md:block inset-0 z-0 overflow-hidden">
-          <div className="hidden md:block absolute md:text-[50px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] font-bold text-transparent bg-gradient-to-r from-black/20 md:top-13 lg:top-48 xl:top-60 2xl:top-30 left-10 sm:left-20 md:left-30 lg:left-40 xl:left-48 2xl:left-56 overflow-hidden bg-clip-text">
+          <div className="hidden md:block absolute md:text-[50px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] font-bold text-transparent bg-gradient-to-r from-black/20 md:top-13 lg:top-20 xl:top-60 2xl:top-30 left-10 sm:left-20 md:left-30 lg:left-40 xl:left-48 2xl:left-56 overflow-hidden bg-clip-text">
             CATERING
           </div>
 
           <img
             src={mint || "/placeholder.svg"}
             alt="Decorative mint"
-            className="absolute -bottom-48 sm:-bottom-56 md:bottom-42 lg:-bottom-80 xl:-bottom-96 2xl:-bottom-45 -left-1 w-[20%] sm:w-[18%] md:w-[13%] lg:w-[12%] xl:w-[10%] 2xl:w-[8%] object-contain z-10 custom-float"
+            className="absolute -bottom-48 sm:-bottom-56 md:bottom-42 lg:bottom-10 xl:-bottom-96 2xl:-bottom-45 -left-1 w-[20%] sm:w-[18%] md:w-[13%] lg:w-[12%] xl:w-[10%] 2xl:w-[8%] object-contain z-10 custom-float"
           />
           <img
             src={lefttopleaf || "/placeholder.svg"}
             alt="Decorative leaf"
-            className="absolute top-5 sm:top-8 md:top-10 lg:top-12 xl:top-14 2xl:top-10 -left-6 sm:-left-8 md:-left-5 lg:-left-12 xl:-left-14 2xl:-left-7 w-[15%] sm:w-[12%] md:w-[10%] lg:w-[8%] xl:w-[7%] 2xl:w-35 object-contain z-0 custom-float"
+            className="absolute top-5 sm:top-8 md:top-10 lg:top-12 xl:top-14 2xl:top-10 -left-6 sm:-left-8 md:-left-5 lg:-left-4 xl:-left-14 2xl:-left-7 w-[15%] sm:w-[12%] md:w-[10%] lg:w-[8%] xl:w-[7%] 2xl:w-35 object-contain z-0 custom-float"
           />
           {/* <img
             src={rightbottomleaf || "/placeholder.svg"}
@@ -124,23 +124,23 @@ const Hero = () => {
           <img
             src={tleaf || "/placeholder.svg"}
             alt="Decorative leaf"
-            className="absolute top-48 sm:top-64 md:top-40 lg:top-100 xl:top-112 2xl:top-80 left-2 sm:left-3 md:left-4 lg:left-5 xl:left-6 2xl:left-10 w-[15%] sm:w-[12%] md:w-[10%] lg:w-[8%] xl:w-[7%] 2xl:w-30 object-contain z-0 custom-float"
+            className="absolute top-48 sm:top-64 md:top-40 lg:top-50 xl:top-112 2xl:top-80 left-2 sm:left-3 md:left-4 lg:left-10 xl:left-6 2xl:left-10 w-[15%] sm:w-[12%] md:w-[10%] lg:w-[8%] xl:w-[7%] 2xl:w-30 object-contain z-0 custom-float"
           />
           <img
             src={centerleaf || "/placeholder.svg"}
             alt="Decorative leaf"
-            className="absolute -bottom-10 sm:-bottom-12 md:bottom-76 lg:-bottom-20 xl:-bottom-24 2xl:bottom-5 left-28 sm:left-80 md:left-80 lg:left-120 xl:left-130 2xl:left-150 w-[10%] sm:w-[8%] md:w-[12%] lg:w-[6%] xl:w-[5%] 2xl:w-45 object-contain z-10 custom-float"
+            className="absolute -bottom-10 sm:-bottom-12 md:bottom-76 lg:bottom-50 xl:-bottom-24 2xl:bottom-5 left-28 sm:left-80 md:left-80 lg:left-110 xl:left-130 2xl:left-150 w-[10%] sm:w-[8%] md:w-[12%] lg:w-[10%] xl:w-[5%] 2xl:w-45 object-contain z-10 custom-float"
           />
         </div>
         {/* Main content container */}
         <div className="container mx-auto py-5 relative z-10 h-full flex items-center">
           <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 w-full">
             {/* Left side - Text content */}
-            <div className="w-full md:w-1/2 pt-4 sm:pt-5 md:pt-0 pl-4 sm:pl-10 md:pl-20 lg:pl-24 xl:pl-27 2xl:pl-30 px-4 sm:px-5 pb-4 sm:pb-5 md:pb-4">
-              <h1 className="text-3xl sm:text-4xl md:text-3xl lg:text-6xl xl:text-7xl 2xl:text-[64px] font-bold text-[#101a24] leading-tight">
+            <div className="w-full md:w-1/2 pt-4 sm:pt-5 md:pt-0 pl-4 sm:pl-10 md:pl-20 lg:pl-24 xl:pl-27 2xl:pl-30 sm:px-5 pb-4 sm:pb-5 md:pb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-3xl lg:text-[42px] xl:text-7xl 2xl:text-[64px] font-bold text-[#101a24] leading-tight">
                 We provide the best Service for you
               </h1>
-              <p className="mt-2 lg:mt-7 xl:mt-8 2xl:mt-9 text-sm sm:text-base md:text-[14px] lg:text-xl xl:text-2xl 2xl:text-[22px] text-[#6b6b6b] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
+              <p className="mt-2 lg:mt-7 xl:mt-8 2xl:mt-9 text-sm sm:text-base md:text-[14px] lg:text-[16px] xl:text-2xl 2xl:text-[22px] text-[#6b6b6b] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
                 Experience the rich flavors of authentic Indian cuisine, crafted
                 with premium ingredients and served with unmatched hospitality.
               </p>
@@ -169,7 +169,7 @@ const Hero = () => {
                   id="rotatingImg"
                   src={rotateingimg || "/placeholder.svg"}
                   alt="Rotating"
-                  className="absolute w-53 sm:w-48 md:w-45 lg:w-64 xl:w-72 2xl:w-103 h-auto z-20 left-50 md:left-[51%] lg:left-[50%] xl:left-[50%] 2xl:left-93 bottom-20 sm:bottom-14 md:bottom-18 lg:bottom-18 xl:bottom-20 2xl:bottom-40 translate-x-[-50%]"
+                  className="absolute w-44 sm:w-48 md:w-45 lg:w-63 xl:w-72 2xl:w-103 h-auto z-20 left-41 md:left-[51%] lg:left-[240px] xl:left-[50%] 2xl:left-88 bottom-16 sm:bottom-14 md:bottom-18 lg:bottom-24 xl:bottom-20 2xl:bottom-39 translate-x-[-50%]"
                 />
 
                 {/* Main food platter */}
@@ -180,25 +180,25 @@ const Hero = () => {
                 />
 
                 {/* Pizza card */}
-                <div className="absolute top-25 sm:top-24 md:top-33 lg:top-30 xl:top-32 2xl:top-70 left-6 sm:left-8 md:left-10 lg:left-12 xl:left-16 2xl:left-10 z-30 custom-float">
+                <div className="absolute top-25 sm:top-24 md:top-33 lg:top-45 xl:top-32 2xl:top-70 left-2 sm:left-8 md:left-10 lg:left-6 xl:left-16 2xl:left-10 z-30 custom-float">
                   <img
                     src={pizza || "/placeholder.svg"}
                     alt="Pizza"
-                    className="w-35 sm:w-28 md:w-25 lg:w-36 xl:w-40 2xl:w-48"
+                    className="w-30 sm:w-28 md:w-25 lg:w-36 xl:w-40 2xl:w-48"
                   />
                 </div>
 
                 {/* Happy customer review */}
-                <div className="absolute -right-2 sm:right-2 md:right-4 lg:right-6 xl:right-8 2xl:right-5 z-40 custom-float">
+                <div className="absolute -right-1 sm:right-2 md:right-4 lg:right-6 xl:right-8 2xl:right-5 z-40 custom-float">
                   <img
                     src={happy || "/placeholder.svg"}
                     alt="Happy Customer"
-                    className="w-35 sm:w-28 md:w-25 lg:w-36 xl:w-40 2xl:w-48"
+                    className="w-32 sm:w-28 md:w-25 lg:w-36 xl:w-40 2xl:w-48"
                   />
                 </div>
 
                 {/* Comment bubble */}
-                <div className="absolute bottom-20 sm:bottom-16 md:bottom-16 lg:bottom-20 xl:bottom-24 2xl:bottom-35 right-50 sm:right-12 md:right-54 lg:right-16 xl:right-20 2xl:right-100 z-30 custom-float">
+                <div className="absolute bottom-20 sm:bottom-16 md:bottom-16 lg:bottom-20 xl:bottom-24 2xl:bottom-35 right-52 sm:right-12 md:right-54 lg:right-65 xl:right-20 2xl:right-100 z-30 custom-float">
                   <img
                     src={comment || "/placeholder.svg"}
                     alt="Comment"
@@ -210,27 +210,27 @@ const Hero = () => {
                 <img
                   src={noodles || "/placeholder.svg"}
                   alt="Noodles"
-                  className="absolute bottom-10 sm:bottom-12 md:bottom-0 md:right-67 lg:bottom-16 xl:bottom-18 2xl:bottom-5 2xl:left-10 w-16 sm:w-20 md:w-30 lg:w-28 xl:w-32 2xl:w-50 hidden md:block animate-slide-up"
+                  className="absolute bottom-10 sm:bottom-12 md:bottom-0 md:right-67 lg:bottom-2 lg:right-88 xl:bottom-18 2xl:bottom-5 2xl:left-2 w-16 sm:w-20 md:w-30 lg:w-34 xl:w-32 2xl:w-50 hidden md:block animate-slide-up"
                 />
                 <img
                   src={salad || "/placeholder.svg"}
                   alt="Salad Bowl"
-                  className="absolute -bottom-16 sm:-bottom-20 md:-bottom-6 lg:-bottom-28 xl:-bottom-30 2xl:-bottom-8 right-40 sm:right-44 md:right-20 lg:right-52 xl:right-56 2xl:right-45 w-14 sm:w-16 md:w-18 lg:w-20 xl:w-24 2xl:w-35 z-30 hidden md:block animate-slide-up"
+                  className="absolute -bottom-16 sm:-bottom-20 md:-bottom-6 lg:-bottom-8 xl:-bottom-30 2xl:-bottom-8 right-40 sm:right-44 md:right-20 lg:right-30 xl:right-56 2xl:right-45 w-14 sm:w-16 md:w-18 lg:w-24 xl:w-24 2xl:w-35 z-30 hidden md:block animate-slide-up"
                 />
                 <img
                   src={sauce || "/placeholder.svg"}
                   alt="Sauce"
-                  className="absolute bottom-16 sm:bottom-18 md:bottom-7 lg:bottom-22 xl:bottom-24 2xl:bottom-20 right-20 sm:right-24 md:right-47 lg:right-32 xl:right-36 2xl:right-90 w-12 sm:w-14 md:w-15 lg:w-18 xl:w-20 2xl:w-24 z-10 hidden md:block animate-slide-up"
+                  className="absolute bottom-16 sm:bottom-18 md:bottom-7 lg:bottom-10 xl:bottom-24 2xl:bottom-20 right-20 sm:right-24 md:right-47 lg:right-56 xl:right-36 2xl:right-90 w-12 sm:w-14 md:w-15 lg:w-18 xl:w-20 2xl:w-24 z-10 hidden md:block animate-slide-up"
                 />
                 <img
                   src={meal || "/placeholder.svg"}
                   alt="Meal"
-                  className="absolute bottom-16 sm:bottom-20 md:bottom-11 lg:bottom-28 xl:bottom-30 2xl:bottom-25 right-0 w-16 sm:w-18 md:w-17 lg:w-24 xl:w-28 2xl:w-32 z-30 hidden md:block animate-slide-up"
+                  className="absolute bottom-16 sm:bottom-20 md:bottom-11 lg:bottom-12 lg:-right-2 xl:bottom-30 2xl:bottom-25 right-0 w-16 sm:w-18 md:w-17 lg:w-24 xl:w-28 2xl:w-32 z-30 hidden md:block animate-slide-up"
                 />
                 <img
                   src={blackpaper || "/placeholder.svg"}
                   alt="Black Pepper"
-                  className="absolute top-5 sm:top-6 md:top-7 lg:top-8 xl:top-9 2xl:top-10 right-10 sm:right-12 md:right-14 lg:right-16 xl:right-20 2xl:right-24 w-16 sm:w-20 md:w-35 lg:w-28 xl:w-32 2xl:w-80 hidden md:block animate-slide-down"
+                  className="absolute top-5 sm:top-6 md:top-7 lg:top-10 xl:top-9 2xl:top-10 right-10 sm:right-12 md:right-14 lg:right-16 xl:right-20 2xl:right-24 w-16 sm:w-20 md:w-35 lg:w-48 xl:w-32 2xl:w-80 hidden md:block animate-slide-down"
                 />
               </div>
             </div>

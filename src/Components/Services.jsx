@@ -182,7 +182,7 @@ const Services = () => {
           <div className="relative">
             <div
               ref={scrollContainerRef}
-              className="flex md:grid overflow-x-auto scrollbar-hide grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 p-4 sm:p-10"
+              className="flex md:grid overflow-x-auto scrollbar-hide grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 sm:p-10"
             >
               {displayServices.map((service, index) => (
                 <div

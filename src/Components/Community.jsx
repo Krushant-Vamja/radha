@@ -475,7 +475,7 @@ const Community = () => {
         {/* Hindu Community Slides - This section was missing in the render */}
 
         {/* Horizontal scrolling community slides */}
-        <div className="w-full overflow-hidden">
+        <div className="max-w-6xl mx-auto">
           <div className="relative">
             <div
               ref={communitySliderRef}
@@ -503,7 +503,7 @@ const Community = () => {
                   >
                     {/* Low opacity header - Removed hidden class */}
                     <div
-                      className={`absolute top-0 text-[100px] font-bold text-white opacity-10 select-none whitespace-nowrap hidden md:block `}
+                      className={`absolute top-0 text-[70px] font-bold text-white opacity-10 select-none whitespace-nowrap hidden md:block `}
                     >
                       {slide.headerText}
                     </div>
@@ -523,7 +523,7 @@ const Community = () => {
                     </ul>
 
                     {/* Circular text with leaf */}
-                    <div className="absolute bottom-0 right-0 w-30 h-30 md:w-60 md:h-60">
+                    <div className="absolute bottom-0 right-0 w-25 h-25 md:w-50 md:h-50">
                       <div className="w-full h-full relative">
                         {/* Circular text - Animated - Fixed text content */}
                         <div
@@ -539,7 +539,7 @@ const Community = () => {
                             <text
                               width="100%"
                               className="text-white font-semibold"
-                              style={{ fontSize: "12px", letterSpacing: "2px" }}
+                              style={{ fontSize: "10px", letterSpacing: "2px" }}
                             >
                               <textPath
                                 xlinkHref={`#circular-path-${index}`}
@@ -556,7 +556,7 @@ const Community = () => {
                           <img
                             src={leaf1 || "/placeholder.svg"}
                             alt="Leaf"
-                            className="w-20 h-20 md:w-38 md:h-38 object-contain"
+                            className="w-15 h-15 md:w-34 md:h-34 object-contain"
                           />
                         </div>
                       </div>

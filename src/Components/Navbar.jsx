@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import leaf from "../assets/leaf.svg";
-import { X, ChevronDown } from "lucide-react"; // Added ChevronDown import
+import { X, ChevronDown } from "lucide-react";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState("Home");
@@ -31,10 +31,10 @@ const Navbar = () => {
   useEffect(() => {
     if (isPopupOpen) {
       setPopupVisible(true);
-      setTimeout(() => setAnimatePopup(true), 0); // Trigger animation after popup is visible
+      setTimeout(() => setAnimatePopup(true), 0);
     } else {
       setAnimatePopup(false);
-      setTimeout(() => setPopupVisible(false), 500); // Matches animation duration
+      setTimeout(() => setPopupVisible(false), 500);
     }
   }, [isPopupOpen]);
 
@@ -53,7 +53,6 @@ const Navbar = () => {
 
   // Handle route and section changes
   useEffect(() => {
-    // Set activeLink based on current route
     const path = location.pathname;
     const matchedLink = navLinks.find(
       (link) =>
@@ -61,14 +60,13 @@ const Navbar = () => {
     );
     setActiveLink(matchedLink || "Home");
 
-    // Handle scroll-based section detection
     const handleScroll = () => {
       const sections = navLinks.map((link) =>
         document.getElementById(link.toLowerCase())
       );
-      const scrollPosition = window.scrollY + window.innerHeight / 3; // Top-third of viewport
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-      let visibleSection = matchedLink || "Home"; // Default to route-based link or Home
+      let visibleSection = matchedLink || "Home";
       sections.forEach((section, index) => {
         if (section) {
           const sectionTop = section.offsetTop;
@@ -83,7 +81,7 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Run on mount to set initial active link
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -97,68 +95,65 @@ const Navbar = () => {
     if (link === "Review") {
       navigate("/review");
     } else {
-      // Scroll to section on current page
-      const sectionId = link.toLowerCase();
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      } else {
-        navigate("/");
-        // Give it time to navigate, then scroll
-        setTimeout(() => {
-          const delayedSection = document.getElementById(sectionId);
-          if (delayedSection) {
-            delayedSection.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 300);
-      }
+      navigate("/");
+      setTimeout(() => {
+        const delayedSection = document.getElementById(link.toLowerCase());
+        if (delayedSection) {
+          delayedSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
     }
   };
 
   return (
     <>
-      <nav className="relative bg-transparent bg-gradient-to-r from-white/30 via-blue-100/30 to-white/30 py-2 px-6 shadow-4xl z-50">
+      <nav className="relative bg-transparent bg-gradient-to-r from-white/30 via-blue-100/30 to-white/30 py-2 px-6 shadow-4xl z-50 w-full top-0">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center">
-            {/* Logo */}
-            <Link to="/" onClick={() => handleLinkClick("Home")}>
-              <img src={logo} alt="Logo" />
+          <div className="flex justify-between items-center h-16">
+            {/* Logo on the left */}
+            <Link
+              to="/"
+              onClick={() => handleLinkClick("Home")}
+              className="flex-shrink-0"
+            >
+              <img src={logo} alt="Logo" className="h-10 w-auto" />
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6 md:text-sm">
-              {navLinks.map((link) => (
-                <div key={link} className="relative">
-                  <button
-                    onClick={() => handleLinkClick(link)}
-                    className={`${
-                      activeLink === link
-                        ? "text-black font-semibold"
-                        : "text-gray-600"
-                    } hover:text-black transition-colors duration-200`}
-                  >
-                    {link}
-                  </button>
-                  {/* {activeLink === link && (
-                    <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+            {/* Desktop Navigation and Book Now Button */}
+            <div className="hidden md:flex items-center space-x-8">
+              <div className="flex space-x-6">
+                {navLinks.map((link) => (
+                  <div key={link} className="relative group">
+                    <button
+                      onClick={() => handleLinkClick(link)}
+                      className={`${
+                        activeLink === link ? "text-black" : "text-gray-600"
+                      } hover:text-black transition-colors duration-200 uppercase text-sm font-medium`}
+                    >
+                      {link}
+                    </button>
+                    {/* Preserved active leaf code */}
+                    {activeLink === link && (
+                      <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                        <img src={leaf} alt="Leaf" className="w-6 h-6" />
+                      </div>
+                    )}
+                    {/* Hover leaf effect */}
+                    <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <img src={leaf} alt="Leaf" className="w-6 h-6" />
                     </div>
-                  )} */}
-                </div>
-              ))}
-            </div>
-
-            {/* Book Now Button (Desktop) */}
-            <div
-              style={{ fontFamily: "David Libre" }}
-              className="hidden md:block"
-            >
-              <button
-                onClick={() => setIsPopupOpen(true)}
-                className="bg-[#0079bf] text-white xl:px-5 px-2 py-2 mr-2 rounded-full shadow-xl transition-all duration-200 [border-top-left-radius:20px] [border-top-right-radius:5px] [border-bottom-left-radius:5px] [border-bottom-right-radius:20px]"
-              >
-                Book Now
-              </button>
+                  </div>
+                ))}
+              </div>
+              {/* Book Now Button (Desktop) */}
+              <div style={{ fontFamily: "David Libre" }}>
+                <button
+                  onClick={() => setIsPopupOpen(true)}
+                  className="bg-[#0079bf] text-white xl:px-5 px-3 py-2 rounded-full shadow-xl transition-all duration-200 [border-top-left-radius:20px] [border-top-right-radius:5px] [border-bottom-left-radius:5px] [border-bottom-right-radius:20px] text-sm font-medium"
+                >
+                  Book Now
+                </button>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -203,18 +198,18 @@ const Navbar = () => {
                       activeLink === link
                         ? "text-black font-semibold"
                         : "text-gray-600"
-                    } hover:text-black transition-colors duration-200 py-2`}
+                    } hover:text-black transition-colors duration-200 py-2 uppercase text-sm font-medium`}
                   >
-                    {/* {activeLink === link && (
+                    {activeLink === link && (
                       <img src={leaf} alt="Leaf" className="w-6 h-6 mr-2" />
-                    )} */}
+                    )}
                     {link}
                   </button>
                 ))}
                 <button
                   style={{ fontFamily: "David Libre" }}
                   onClick={() => setIsPopupOpen(true)}
-                  className="bg-[#0079bf] font-libre text-white px-6 py-3 rounded-[20px] shadow-xl transition-all duration-200 text-center mt-4"
+                  className="bg-[#0079bf] font-libre text-white px-6 py-3 rounded-[20px] shadow-xl transition-all duration-200 text-center mt-4 text-sm font-medium"
                 >
                   Book Now
                 </button>
@@ -271,7 +266,6 @@ const Navbar = () => {
               </p>
 
               <form className="space-y-6">
-                {/* Name Field */}
                 <div>
                   <label
                     htmlFor="name"
@@ -285,8 +279,6 @@ const Navbar = () => {
                     className="w-full p-3 rounded-[20px] bg-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-[#0079bf]"
                   />
                 </div>
-
-                {/* Email Field */}
                 <div>
                   <label
                     htmlFor="email"
@@ -300,8 +292,6 @@ const Navbar = () => {
                     className="w-full p-3 rounded-[20px] bg-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-[#0079bf]"
                   />
                 </div>
-
-                {/* Event Type Dropdown */}
                 <div className="relative" ref={dropdownRef}>
                   <label
                     htmlFor="eventType"
@@ -320,8 +310,6 @@ const Navbar = () => {
                     </span>
                     <ChevronDown size={20} className="text-gray-500" />
                   </div>
-
-                  {/* Dropdown Menu */}
                   {isDropdownOpen && (
                     <div className="absolute z-10 w-full mt-1 rounded-[20px] bg-[#E0E0E0] shadow-lg">
                       {eventTypes.map((type) => (
@@ -339,8 +327,6 @@ const Navbar = () => {
                     </div>
                   )}
                 </div>
-
-                {/* Message Field */}
                 <div>
                   <label
                     htmlFor="message"
@@ -354,8 +340,6 @@ const Navbar = () => {
                     className="w-full p-3 rounded-[20px] bg-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-[#0079bf] resize-none"
                   ></textarea>
                 </div>
-
-                {/* Submit Button */}
                 <button
                   type="button"
                   className="w-full py-3 bg-[#0079bf] text-white font-medium rounded-[20px] hover:bg-[#0079bf]/90 transition-colors uppercase tracking-wide"

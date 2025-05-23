@@ -52,7 +52,7 @@ export default function Gallery() {
                   alt="Vegetable splash"
                   width={200}
                   height={200}
-                  className="right-360 -top-15 absolute custom-float"
+                  className="right-335 -top-15 absolute custom-float"
                 />
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 z-10">
                   Our Gallery
@@ -72,11 +72,11 @@ export default function Gallery() {
 
             {/* Right side single image */}
             <div className="md:w-2/3 z-10 order-1 md:order-2 mb-8 md:mb-0">
-              <div className="relative h-80 md:h-[400px] md:mr-10 overflow-hidden">
+              <div className="relative md:h-auto md:mr-10 overflow-hidden">
                 <img
                   src={gallery}
                   alt="Gallery showcase"
-                  className="object-contain w-full h-full"
+                  className="object-contain w-full h-auto rounded-[50px]"
                 />
               </div>
             </div>
