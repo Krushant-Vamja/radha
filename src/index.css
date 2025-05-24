@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
-
 @theme {
   --breakpoint-xs: 325px;    /* Extra small devices */
   --breakpoint-sm: 576px;    /* Small devices */
@@ -11,6 +9,44 @@
   --breakpoint-2xl: 1440px;  /* 2x Extra large devices */
 }
 
+
+
+/* Example: Custom media queries using @theme variables */
+@media (min-width: var(--breakpoint-xs)) {
+  .carousel-container {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: var(--breakpoint-sm)) {
+  .carousel-container {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: var(--breakpoint-md)) {
+  .carousel-container {
+    max-width: 75%;
+  }
+}
+
+@media (min-width: var(--breakpoint-lg)) {
+  .carousel-container {
+    max-width: 1280px; /* Matches lg:max-w-5xl */
+  }
+}
+
+@media (min-width: var(--breakpoint-xl)) {
+  .carousel-container {
+    max-width: 70%;
+  }
+}
+
+@media (min-width: var(--breakpoint-2xl)) {
+  .carousel-container {
+    max-width: 65%;
+  }
+}
 
 /* Hide scrollbar for Webkit, Firefox, and Edge */
 .scrollbar-hide::-webkit-scrollbar {
@@ -81,3 +117,4 @@ img {
   user-select: none;
   pointer-events: none;
 }
+

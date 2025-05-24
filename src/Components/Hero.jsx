@@ -129,7 +129,7 @@ const Hero = () => {
           <img
             src={centerleaf || "/placeholder.svg"}
             alt="Decorative leaf"
-            className="absolute -bottom-10 sm:-bottom-12 md:bottom-76 lg:bottom-50 xl:-bottom-24 2xl:bottom-5 left-28 sm:left-80 md:left-80 lg:left-110 xl:left-130 2xl:left-150 w-[10%] sm:w-[8%] md:w-[12%] lg:w-[10%] xl:w-[5%] 2xl:w-45 object-contain z-10 custom-float"
+            className="absolute -bottom-10 sm:-bottom-12 md:bottom-76 lg:bottom-50 xl:-bottom-24 2xl:bottom-15 left-28 sm:left-80 md:left-80 lg:left-110 xl:left-130 2xl:left-150 w-[10%] sm:w-[8%] md:w-[12%] lg:w-[10%] xl:w-[5%] 2xl:w-45 object-contain z-10 custom-float"
           />
         </div>
         {/* Main content container */}

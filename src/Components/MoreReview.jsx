@@ -8,7 +8,8 @@ import p6 from "../assets/p6.svg";
 import p7 from "../assets/p7.svg";
 
 // Temporary Google link
-const REVIEWS_PAGE_URL =
+const REVIEWS_PAGE_URL = "https://g.page/RADHA-EVENTS/review?gm";
+const REVIEWS_PAGE_URL1 =
   "https://www.google.com/search?sca_esv=06a2c7a83ea8322e&sxsrf=AHTn8zoXQluHXp14yg7JBnbdgdfAFMPY9A:1746861031441&si=APYL9bs7Hg2KMLB-4tSoTdxuOx8BdRvHbByC_AuVpNyh0x2KzWkBEIiaOGtsERWM3ttjqr7g5GrdJpRCNLlLNkb2CQgfS-Ez2UU1A6U2aHqqcKWP30VY2HTuNE-SxThrUV_AoDFKFFRh&q=Radha+Caterers+Reviews&sa=X&ved=2ahUKEwjH3YC6rJiNAxX-dfUHHd96DUcQ0bkNegQITRAD&biw=1536&bih=710&dpr=1.25";
 
 const MoreReview = () => {
@@ -156,7 +157,7 @@ const MoreReview = () => {
 
         {/* View More Reviews Button */}
         <div className="flex justify-center mt-10 mb-16 gap-5">
-          <a href={REVIEWS_PAGE_URL}>
+          <a href={REVIEWS_PAGE_URL1}>
             <button className="bg-[#0079BF] hover:bg-[#0079BF]/80 text-white font-medium py-3 px-8 [border-top-left-radius:20px] [border-top-right-radius:5px] [border-bottom-left-radius:5px] [border-bottom-right-radius:20px] transition-colors">
               More Reviews
             </button>

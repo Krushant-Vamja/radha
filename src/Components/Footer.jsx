@@ -46,7 +46,7 @@ const ScrollToTopButton = () => {
     >
       <button
         onClick={scrollToTop}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all hover:scale-110"
+        className="bg-[#0079bf] hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all hover:scale-110"
         aria-label="Scroll to top"
       >
         <ArrowUp size={20} />
@@ -119,7 +119,7 @@ const Footer = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-3 my-2 rounded-full shadow-md transition-all duration-200"
+                    className="bg-[#0079bf] hover:bg-blue-700 text-white text-sm font-semibold px-6 py-3 my-2 rounded-full shadow-md transition-all duration-200"
                   >
                     Submit
                   </button>
@@ -196,7 +196,7 @@ const Footer = () => {
                     />
                     <button
                       type="submit"
-                      className="bg-blue-600 text-white p-2 rounded-r"
+                      className="bg-[#0079bf] text-white p-2 rounded-r"
                       aria-label="Subscribe"
                     >
                       <Send size={16} />
@@ -266,9 +266,9 @@ const Footer = () => {
                 </div>
 
                 {/* Column 4: Contact */}
-                <div className="lg:col-span-1">
+                <div className="lg:col-span-1 w-full">
                   <h3 className="text-lg font-bold mb-4">Contact us</h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 w-full">
                     <li className="flex items-start relative">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -301,7 +301,7 @@ const Footer = () => {
                     <li className="flex items-start">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2 text-gray-600"
+                        className="h-5 w-5 text-gray-600 top-1 left-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -315,7 +315,7 @@ const Footer = () => {
                       </svg>
                       <a
                         href="mailto:radha.caterers2016@Gmail.com"
-                        className="text-gray-600"
+                        className="text-gray-600 md:pl-2 pl-0.5"
                       >
                         radha.caterers2016@Gmail.com
                       </a>
@@ -323,7 +323,7 @@ const Footer = () => {
                     <li className="flex items-start">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2 text-gray-600"
+                        className="h-4.5 w-4.5 mr-2 text-gray-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -342,7 +342,7 @@ const Footer = () => {
                     <li className="flex items-start">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2 text-gray-600"
+                        className="h-4.5 w-4.5 mr-2 text-gray-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -363,7 +363,7 @@ const Footer = () => {
                         href="https://www.facebook.com/share/152mhTmhqgB/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
+                        className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         aria-label="Facebook"
                       >
                         <img src={fb} className="size-4" alt="Facebook icon" />
@@ -372,7 +372,7 @@ const Footer = () => {
                         href="https://www.instagram.com/radhacaterers?igsh=MXc0bzlqZ3E4Y25jMQ=="
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
+                        className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         aria-label="Instagram"
                       >
                         <img
@@ -385,7 +385,7 @@ const Footer = () => {
                         href="https://wa.me/+918000396216?text=Hello%20Radha%20Caterers"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
+                        className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         aria-label="WhatsApp"
                       >
                         <img
@@ -398,7 +398,7 @@ const Footer = () => {
                         href="https://www.youtube.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
+                        className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         aria-label="Youtube"
                       >
                         <img src={yt} className="size-4" alt="Youtube icon" />
@@ -407,7 +407,7 @@ const Footer = () => {
                         href="https://www.linkedin.com/in/shailesh-godhani-85ba671b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors z-50 relative"
+                        className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors z-50 relative"
                         aria-label="Linkedin"
                       >
                         <img
@@ -421,7 +421,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-blue-600 text-white text-center py-4 mt-8">
+            <div className="bg-[#0079bf] text-white text-center py-4 mt-8">
               <p>© 2025 Radha Caterers. All rights reserved.</p>
               <p>Developed by Godhani technology</p>
             </div>

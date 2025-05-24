@@ -64,7 +64,7 @@ const Founder = () => {
           </div>
 
           {/* First Founder's Details */}
-          <div className="space-y-6 flex h-[430px] flex-col justify-center">
+          <div className="space-y-6 flex lg:h-[430px] flex-col justify-center">
             <h3 className="font-[Poppins] font-semibold text-3xl text-left text-[#2C2F24]">
               {founders[0].name}
             </h3>
@@ -160,7 +160,7 @@ const Founder = () => {
               <img
                 src={sg}
                 alt="Shailesh Godhani"
-                className="w-50 h-[280px] object-cover rounded-[30px] cursor-pointer transition-all duration-300 hover:border-[#0079BF] hover:scale-105"
+                className="w-50 h-[280px]  object-cover rounded-[30px] cursor-pointer transition-all duration-300 hover:border-[#0079BF] hover:scale-105"
               />
             </div>
             <div
