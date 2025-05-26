@@ -1,20 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 import herobg from "../assets/herobg.jpg";
 import mainimg from "../assets/mainimg.svg";
-import rotateingimg from "../assets/rotateingimg.svg";
+import rotateingimg from "../assets/rotateingimg.png";
 import rightbottomleaf from "../assets/rightbottomleaf.svg";
-import mint from "../assets/mint.svg";
-import lefttopleaf from "../assets/lefttopleaf.svg";
-import pizza from "../assets/pizza.svg";
-import happy from "../assets/happy.svg";
-import comment from "../assets/comment.svg";
-import noodles from "../assets/noodles.svg";
-import salad from "../assets/salad.svg";
-import sauce from "../assets/sauce.svg";
-import meal from "../assets/meal.svg";
-import centerleaf from "../assets/centerleaf.svg";
-import tleaf from "../assets/tleaf.svg";
-import blackpaper from "../assets/blackpaper.svg";
+import mint from "../assets/mint.png";
+import lefttopleaf from "../assets/lefttopleaf.png";
+import pizza from "../assets/pizza.png";
+import happy from "../assets/happy.png";
+import comment from "../assets/comment.png";
+import noodles from "../assets/noodles.png";
+import salad from "../assets/salad.png";
+import sauce from "../assets/sauce.png";
+import meal from "../assets/meal.png";
+import centerleaf from "../assets/centerleaf.png";
+import tleaf from "../assets/tleaf.png";
+import blackpaper from "../assets/blackpaper.png";
 import { X, ChevronDown } from "lucide-react";
 
 const Hero = () => {
