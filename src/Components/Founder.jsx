@@ -3,7 +3,7 @@ import sg from "../assets/sg.png";
 import vp from "../assets/vp.png";
 import left from "../assets/left.svg";
 import right from "../assets/right.svg";
-import servicebg from "../assets/servicebg.svg";
+import servicebg from "../assets/servicebg.jpg";
 
 const Founder = () => {
   const [active, setActive] = useState(null); // or default to 0 or 1
@@ -44,7 +44,7 @@ const Founder = () => {
 
       {/* Foreground Content */}
       <div className="relative z-10">
-        <h2 className="text-center text-4xl md:text-5xl mb-2 font-serif text-[#2C2F24]">
+        <h2 className="text-center text-4xl md:text-5xl mb-2 mt-10 font-serif text-[#2C2F24]">
           Meet Our Founders
         </h2>
         <p className="text-sm md:text-base text-[#5C6574] text-center mb-8 font-[Poppins]">
@@ -59,16 +59,16 @@ const Founder = () => {
               src={sg}
               alt="Shailesh Godhani"
               onClick={() => setActive(0)}
-              className="w-[300px] h-[430px] object-cover rounded-[30px] cursor-pointer transition-all duration-300 hover:border-[#0079BF] hover:scale-105"
+              className=" w-[300px] aspect-[3/4] object-cover rounded-[30px] cursor-pointer transition-all duration-300 hover:border-[#0079BF] hover:scale-105"
             />
           </div>
 
           {/* First Founder's Details */}
-          <div className="space-y-6 flex lg:h-[430px] flex-col justify-center">
+          <div className=" flex flex-col justify-center">
             <h3 className="font-[Poppins] font-semibold text-3xl text-left text-[#2C2F24]">
               {founders[0].name}
             </h3>
-            <p className="font-[Poppins] text-[#5C6574] font-semibold text-left text-lg">
+            <p className="font-[Poppins] text-[#5C6574] text-[14px] font-semibold text-left text-lg">
               {founders[0].post}
             </p>
             <p className="font-[Poppins] text-[#5C6574] text-left text-[14px]">
@@ -78,15 +78,15 @@ const Founder = () => {
               {founders[0].stats.map((s, i) => (
                 <div
                   key={i}
-                  className="w-[150px] h-[89px] border bg-white border-[#DBDFD0] flex flex-col items-center justify-center text-center rounded-lg shadow-sm"
+                  className="xl:w-[150px] w-[100px] xl:h-[89px] h-[60px] border bg-white border-[#DBDFD0] flex flex-col items-center justify-center text-center rounded-lg shadow-sm"
                 >
                   <p
-                    className="text-[22px] text-[#2C2F24]"
+                    className="text-[14px] text-[#2C2F24] xl:text-[22px]"
                     // style={{ fontFamily: "Playfair Display" }}
                   >
                     {s.value}
                   </p>
-                  <p className="font-[Poppins] text-[#414536] text-[10px] lowercase">
+                  <p className="font-[Poppins] text-[#414536] px-2 text-[9px] xl:text-[10px] lowercase">
                     {s.label}
                   </p>
                 </div>
@@ -100,12 +100,12 @@ const Founder = () => {
               src={vp}
               alt="Vishal Padsala"
               onClick={() => setActive(1)}
-              className="w-[300px] h-[430px] object-cover rounded-[30px] cursor-pointer transition-all duration-300 hover:border-[#0079BF] hover:scale-105"
+              className="w-[300px] aspect-[3/4] object-cover rounded-[30px] cursor-pointer transition-all duration-300 hover:border-[#0079BF] hover:scale-105"
             />
           </div>
 
           {/* Second Founder's Details */}
-          <div className="space-y-4 h-[430px] flex flex-col justify-center">
+          <div className="space-y-4 flex flex-col justify-center">
             <h3 className="font-[Poppins] font-semibold text-3xl text-left text-[#2C2F24]">
               {founders[1].name}
             </h3>
@@ -119,15 +119,15 @@ const Founder = () => {
               {founders[1].stats.map((s, i) => (
                 <div
                   key={i}
-                  className="w-[150px] h-[89px] border bg-white border-[#DBDFD0] flex flex-col items-center justify-center text-center rounded-lg shadow-sm"
+                  className="xl:w-[150px] w-[100px] xl:h-[89px] h-[60px] border bg-white border-[#DBDFD0] flex flex-col items-center justify-center text-center rounded-lg shadow-sm"
                 >
                   <p
-                    className="text-[22px] text-[#2C2F24]"
+                    className="text-[14px] text-[#2C2F24] xl:text-[22px]"
                     // style={{ fontFamily: "Playfair Display" }}
                   >
                     {s.value}
                   </p>
-                  <p className="font-[Poppins] text-[#414536] px-2 text-[10px] lowercase">
+                  <p className="font-[Poppins] text-[#414536] px-2 text-[9px] xl:text-[10px] lowercase">
                     {s.label}
                   </p>
                 </div>

@@ -1,7 +1,5 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
-import herobg from "../assets/herobg.svg";
+import herobg from "../assets/herobg.jpg";
 import mainimg from "../assets/mainimg.svg";
 import rotateingimg from "../assets/rotateingimg.svg";
 import rightbottomleaf from "../assets/rightbottomleaf.svg";
@@ -165,19 +163,22 @@ const Hero = () => {
               {/* Container for layering images */}
               <div className="relative w-full flex justify-center items-center">
                 {/* Rotating background image */}
-                <img
-                  id="rotatingImg"
-                  src={rotateingimg || "/placeholder.svg"}
-                  alt="Rotating"
-                  className="absolute w-44 sm:w-48 md:w-45 lg:w-63 xl:w-72 2xl:w-103 h-auto z-20 left-41 md:left-[51%] lg:left-[240px] xl:left-[50%] 2xl:left-88 bottom-16 sm:bottom-14 md:bottom-18 lg:bottom-24 xl:bottom-20 2xl:bottom-39 translate-x-[-50%]"
-                />
 
-                {/* Main food platter */}
-                <img
-                  src={mainimg || "/placeholder.svg"}
-                  alt="Indian Food Platter"
-                  className="relative w-[90%] sm:w-[80%] md:w-[85%] lg:w-[90%] xl:w-[95%] 2xl:w-[700px] z-10"
-                />
+                <div className="relative w-[90%] sm:w-[80%] md:w-[85%] lg:w-[90%] xl:w-[95%] 2xl:w-[700px] z-10">
+                  <img
+                    id="rotatingImg"
+                    src={rotateingimg || "/placeholder.svg"}
+                    alt="Rotating"
+                    className="absolute z-90 w-[52%] sm:w-[48%] sm:left-20 sm:bottom-20 bottom-15 left-15 md:w-[50%] md:left-15 md:bottom-15 lg:w-[52%] lg:bottom-23 lg:left-22 xl:w-[55%] xl:left-29 xl:bottom-30 2xl:w-[58%] 2xl:left-40 2xl:bottom-40"
+                  />
+
+                  {/* Main food platter */}
+                  <img
+                    src={mainimg || "/placeholder.svg"}
+                    alt="Indian Food Platter"
+                    className="relative w-[90%] sm:w-[80%] md:w-[85%] lg:w-[90%] xl:w-[95%] 2xl:w-[700px] z-10"
+                  />
+                </div>
 
                 {/* Pizza card */}
                 <div className="absolute top-25 sm:top-24 md:top-33 lg:top-45 xl:top-32 2xl:top-70 left-2 sm:left-8 md:left-10 lg:left-6 xl:left-16 2xl:left-10 z-30 custom-float">

@@ -133,11 +133,11 @@ const Navbar = () => {
                       {link}
                     </button>
                     {/* Preserved active leaf code */}
-                    {activeLink === link && (
+                    {/* {activeLink === link && (
                       <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
                         <img src={leaf} alt="Leaf" className="w-6 h-6" />
                       </div>
-                    )}
+                    )} */}
                     {/* Hover leaf effect */}
                     <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <img src={leaf} alt="Leaf" className="w-6 h-6" />

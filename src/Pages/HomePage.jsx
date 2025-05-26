@@ -4,12 +4,12 @@ import Services from "../Components/Services";
 import Recipe from "../Components/Recipe";
 import ImageSwipe from "../Components/ImageSwipe";
 import Community from "../Components/Community";
-import Hero from "../Components/Hero";
 import Testimonials from "../Components/Testimonials";
 import Footer from "../Components/Footer";
 import Gallery from "../Components/Gallery";
 import Quality from "../Components/Quality";
 import Founder from "../Components/Founder";
+import Hero from "../Components/hero";
 
 const HomePage = () => {
   return (

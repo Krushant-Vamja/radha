@@ -8,7 +8,6 @@ import tomato2 from "../assets/tomato2.svg";
 import coma1 from "../assets/coma1.svg";
 import coma2 from "../assets/coma2.svg";
 import p4 from "../assets/p4.svg";
-import p5 from "../assets/p5.svg";
 import p6 from "../assets/p6.svg";
 import p7 from "../assets/p7.svg";
 

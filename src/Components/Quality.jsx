@@ -1,15 +1,11 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import italian from "../assets/italian.svg";
 import pizza1 from "../assets/pizza1.svg";
 import gujarati1 from "../assets/gujarati1.svg";
 import south from "../assets/south.svg";
 import punjabi from "../assets/punjabi.svg";
-import servicebg from "../assets/servicebg.svg";
+import servicebg from "../assets/servicebg.jpg";
 
-// Food data array with all the necessary information
 const foodItems = [
   {
     id: 1,
@@ -58,8 +54,8 @@ export default function Quality() {
     width: typeof window !== "undefined" ? window.innerWidth : 1200,
     height: typeof window !== "undefined" ? window.innerHeight : 800,
   });
+  const [touchStart, setTouchStart] = useState(null);
 
-  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -67,35 +63,24 @@ export default function Quality() {
         height: window.innerHeight,
       });
     };
-
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial call
-
+    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Add keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "ArrowLeft") {
-        handleLeftClick();
-      } else if (e.key === "ArrowRight") {
-        handleRightClick();
-      }
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowLeft" && !isAnimating) handleLeftClick();
+      else if (event.key === "ArrowRight" && !isAnimating) handleRightClick();
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isAnimating, items]);
+  }, [isAnimating]);
 
-  // Add auto-scrolling functionality
   useEffect(() => {
     const autoScrollInterval = setInterval(() => {
-      if (!isAnimating) {
-        handleRightClick();
-      }
-    }, 3000); // Auto-scroll every 3 seconds
-
+      if (!isAnimating) handleRightClick();
+    }, 4000);
     return () => clearInterval(autoScrollInterval);
   }, [isAnimating]);
 
@@ -104,7 +89,6 @@ export default function Quality() {
   const handleRightClick = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-
     const newItems = items.map((item) => {
       switch (item.position) {
         case "center":
@@ -121,7 +105,6 @@ export default function Quality() {
           return item;
       }
     });
-
     setItems(newItems);
     setTimeout(() => setIsAnimating(false), 600);
   };
@@ -129,7 +112,6 @@ export default function Quality() {
   const handleLeftClick = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-
     const newItems = items.map((item) => {
       switch (item.position) {
         case "center":
@@ -146,104 +128,262 @@ export default function Quality() {
           return item;
       }
     });
-
     setItems(newItems);
     setTimeout(() => setIsAnimating(false), 600);
   };
 
-  // Responsive positioning based on screen size
   const getItemStyle = (position) => {
-    const isMobile = windowSize.width < 640; // sm breakpoint
-    const isTablet = windowSize.width >= 640 && windowSize.width < 1024; // sm to lg
-    const isLargeScreen = windowSize.width >= 1280; // xl and above
+    const isMobile = windowSize.width < 768;
+    const isTablet = windowSize.width >= 768 && windowSize.width < 1024;
+    const isDesktop = windowSize.width >= 1024 && windowSize.width < 1536;
+    const is2XL = windowSize.width >= 1536 && windowSize.width < 2560;
+    const isAbove4K = windowSize.width >= 2560;
 
-    // Calculate responsive values
-    const containerWidth = Math.min(windowSize.width, 1280);
-    const containerHeight = isMobile
-      ? windowSize.height * 0.6
-      : isTablet
-      ? windowSize.height * 0.7
-      : windowSize.height * 0.8;
+    if (isAbove4K) {
+      console.log(
+        `Screen width: ${windowSize.width}px, using 4K layout with 2560px container`
+      );
+    }
 
-    // Center point of the container
+    const containerWidth = Math.min(windowSize.width, isAbove4K ? 2560 : 1400);
+    const containerHeight = windowSize.height;
+
     const centerX = containerWidth / 2;
     const centerY = containerHeight / 2;
 
-    // Scale factors based on screen size
-    const centerScale = isMobile ? 0.9 : isTablet ? 0.95 : 1;
-    const sideScale = isMobile ? 0.6 : isTablet ? 0.65 : 0.75;
-    const farSideScale = isMobile ? 0.4 : isTablet ? 0.45 : 0.6;
-
-    // Base size for the center item
     const baseSize = isMobile
+      ? 120
+      : isTablet
+      ? 160
+      : isDesktop
       ? 200
-      : isTablet
-      ? 180
-      : isLargeScreen
-      ? 250
-      : 250;
+      : is2XL
+      ? 240
+      : 280;
+    const scales = {
+      center: isMobile
+        ? 1.2
+        : isTablet
+        ? 1.3
+        : isDesktop
+        ? 1.4
+        : is2XL
+        ? 1.5
+        : 1.6,
+      side: isMobile ? 0.8 : isTablet ? 0.9 : isDesktop ? 1 : is2XL ? 1.1 : 1.2,
+      farSide: isMobile
+        ? 0.6
+        : isTablet
+        ? 0.7
+        : isDesktop
+        ? 0.8
+        : is2XL
+        ? 0.9
+        : 1,
+    };
 
-    // Horizontal spacing factors
     const level1Offset = isMobile
-      ? containerWidth * 0.3
-      : isTablet
       ? containerWidth * 0.25
-      : containerWidth * 0.3;
+      : isTablet
+      ? containerWidth * 0.22
+      : isDesktop
+      ? containerWidth * 0.2
+      : is2XL
+      ? containerWidth * 0.3
+      : containerWidth * 0.35;
     const level2Offset = isMobile
-      ? containerWidth * 0.5
+      ? containerWidth * 0.4
       : isTablet
       ? containerWidth * 0.35
-      : containerWidth * 0.4;
+      : isDesktop
+      ? containerWidth * 0.32
+      : is2XL
+      ? containerWidth * 0.45
+      : containerWidth * 0.5;
+    const verticalOffset = isMobile
+      ? 10
+      : isTablet
+      ? 20
+      : isDesktop
+      ? 30
+      : is2XL
+      ? 50
+      : 60;
 
-    // Vertical offset for non-center items
-    const verticalOffset = isMobile ? 20 : isTablet ? 40 : 60;
+    const lgLevel1Offset = containerWidth * 0.25;
+    const lgLevel2Offset = containerWidth * 0.4;
+    const lgVerticalOffset = isAbove4K ? 50 : 40;
 
-    if (isMobile) {
+    const commonStyles = {
+      zIndex: position === "center" ? 50 : position.includes("1") ? 40 : 30,
+      width:
+        baseSize *
+        (position === "center"
+          ? scales.center
+          : position.includes("1")
+          ? scales.side
+          : scales.farSide),
+      height:
+        baseSize *
+        (position === "center"
+          ? scales.center
+          : position.includes("1")
+          ? scales.side
+          : scales.farSide),
+      transition: "all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)",
+    };
+
+    if (isAbove4K) {
       switch (position) {
         case "center":
           return {
-            zIndex: 50,
-            width: baseSize * centerScale,
-            height: baseSize * centerScale,
-            top: centerY - (baseSize * centerScale) / 100,
-            left: centerX - (baseSize * centerScale) / 0.8 + level1Offset,
-            transform: "translate(0, 0)",
+            ...commonStyles,
+            top: centerY - (baseSize * scales.center) / 1.6,
+            left: centerX - (baseSize * scales.center) / 2,
             opacity: 1,
+            transform: "scale(0.75)",
           };
         case "left-1":
           return {
-            zIndex: 40,
-            width: baseSize * sideScale,
-            height: baseSize * sideScale,
-            top: centerY - (baseSize * sideScale) / 100 + verticalOffset * 4,
-            left: centerX - (baseSize * sideScale) / 1.2 - level1Offset,
-            transform: "translate(0, 0)",
-            opacity: 1,
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 3 - lgVerticalOffset / 2,
+            left: centerX - baseSize * scales.side * 1.2 - lgLevel1Offset / 6,
+            opacity: 0.9,
+            transform: "scale(0.7)",
+          };
+        case "left-2":
+          return {
+            ...commonStyles,
+            top:
+              centerY -
+              (baseSize * scales.farSide) / 8 +
+              lgVerticalOffset * 1.8,
+            left: centerX - baseSize * scales.farSide - lgLevel2Offset / 2.5,
+            opacity: 0.7,
+            transform: "scale(0.6)",
           };
         case "right-1":
           return {
-            zIndex: 40,
-            width: baseSize * sideScale,
-            height: baseSize * sideScale,
-            top: centerY - (baseSize * sideScale) / 100 + verticalOffset * 4,
-            left: centerX - (baseSize * sideScale) / 2 + level1Offset,
-            transform: "translate(0, 0)",
-            opacity: 1,
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 3 - lgVerticalOffset / 2,
+            left: centerX + baseSize * scales.side * 0.1 + lgLevel1Offset / 4.5,
+            opacity: 0.9,
+            transform: "scale(0.7)",
           };
-        case "left-2":
         case "right-2":
           return {
-            zIndex: 30,
-            width: baseSize * farSideScale,
-            height: baseSize * farSideScale,
-            top: centerY - (baseSize * farSideScale) / 10 + verticalOffset * 9,
+            ...commonStyles,
+            top:
+              centerY -
+              (baseSize * scales.farSide) / 8 +
+              lgVerticalOffset * 1.8,
+            left: centerX + baseSize * scales.farSide + lgLevel2Offset / 8,
+            opacity: 0.7,
+            transform: "scale(0.6)",
+          };
+        default:
+          return {};
+      }
+    } else if (is2XL) {
+      switch (position) {
+        case "center":
+          return {
+            ...commonStyles,
+            top: centerY - (baseSize * scales.center) / 1.8,
+            left: centerX - (baseSize * scales.center) / 3,
+            opacity: 1,
+            transform: "scale(0.65)",
+          };
+        case "left-1":
+          return {
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 4 - lgVerticalOffset / 3,
+            left: centerX - baseSize * scales.side - lgLevel1Offset / 8,
+            opacity: 0.9,
+            transform: "scale(0.6)",
+          };
+        case "left-2":
+          return {
+            ...commonStyles,
+            top:
+              centerY -
+              (baseSize * scales.farSide) / 10 +
+              lgVerticalOffset * 1.5,
             left:
-              position === "left-2"
-                ? centerX - (baseSize * farSideScale) / 1 - level2Offset
-                : centerX - (baseSize * farSideScale) / 2 + level2Offset,
-            transform: "translate(0, 0)",
-            opacity: 0.3,
-            display: "none", // Hide far items on mobile
+              centerX - (baseSize * scales.farSide) / 2 - lgLevel2Offset / 1.8,
+            opacity: 0.7,
+            transform: "scale(0.5)",
+          };
+        case "right-1":
+          return {
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 4 - lgVerticalOffset / 3,
+            left: centerX + lgLevel1Offset / 2.1,
+            opacity: 0.9,
+            transform: "scale(0.6)",
+          };
+        case "right-2":
+          return {
+            ...commonStyles,
+            top:
+              centerY -
+              (baseSize * scales.farSide) / 10 +
+              lgVerticalOffset * 1.4,
+            left:
+              centerX + baseSize * scales.farSide * 0.5 + lgLevel2Offset / 2.6,
+            opacity: 0.7,
+            transform: "scale(0.5)",
+          };
+        default:
+          return {};
+      }
+    } else if (isDesktop) {
+      switch (position) {
+        case "center":
+          return {
+            ...commonStyles,
+            top: centerY - (baseSize * scales.center) / 1.6,
+            left: centerX - (baseSize * scales.center) / 2.2,
+            opacity: 1,
+            transform: "scale(1)",
+          };
+        case "left-1":
+          return {
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 4 + lgVerticalOffset * 1,
+            left: centerX - baseSize * scales.side - lgLevel1Offset / 1.5,
+            opacity: 0.9,
+            transform: "scale(1)",
+          };
+        case "left-2":
+          return {
+            ...commonStyles,
+            top:
+              centerY - (baseSize * scales.farSide) / 10 + lgVerticalOffset * 4,
+            left:
+              centerX - baseSize * scales.farSide * 1.5 - lgLevel2Offset / 1.5,
+            opacity: 0.7,
+            transform: "scale(1)",
+          };
+        case "right-1":
+          return {
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 4 + lgVerticalOffset,
+            left: centerX + lgLevel1Offset / 1.5,
+            opacity: 0.9,
+            transform: "scale(1)",
+          };
+        case "right-2":
+          return {
+            ...commonStyles,
+            top:
+              centerY -
+              (baseSize * scales.farSide) / 10 +
+              lgVerticalOffset * 3.8,
+            left:
+              centerX + baseSize * scales.farSide * 0.5 + lgLevel2Offset / 1.5,
+            opacity: 0.7,
+            transform: "scale(1)",
           };
         default:
           return {};
@@ -252,102 +392,46 @@ export default function Quality() {
       switch (position) {
         case "center":
           return {
-            zIndex: 50,
-            width: baseSize * centerScale,
-            height: baseSize * centerScale,
-            top: centerY - (baseSize * centerScale) / 3,
-            left: centerX - (baseSize * centerScale) / 2.5,
-            transform: "translate(0, 0)",
+            ...commonStyles,
+            top: centerY - (baseSize * scales.center) / 2,
+            left: centerX - (baseSize * scales.center) / 2,
             opacity: 1,
+            transform: "scale(1)",
           };
         case "left-1":
           return {
-            zIndex: 40,
-            width: baseSize * sideScale,
-            height: baseSize * sideScale,
-            top: centerY - (baseSize * sideScale) / 4 + verticalOffset,
-            left: centerX - (baseSize * sideScale) / 1000 - level1Offset / 1.2,
-            transform: "translate(0, 0)",
-            opacity: 1,
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 5 + verticalOffset,
+            left: centerX - baseSize * scales.side * 0.9 - level1Offset,
+            opacity: 0.8,
+            transform: "scale(1)",
           };
         case "left-2":
           return {
-            zIndex: 30,
-            width: baseSize * farSideScale,
-            height: baseSize * farSideScale,
-            top: centerY - (baseSize * farSideScale) / 10 + verticalOffset * 2,
-            left:
-              centerX - (baseSize * farSideScale) / 800 - level2Offset / 1.2,
-            transform: "translate(0, 0)",
-            opacity: 1,
+            ...commonStyles,
+            top:
+              centerY - (baseSize * scales.farSide) / 14 + verticalOffset * 8.5,
+            left: centerX - baseSize * scales.farSide - 2 - level2Offset,
+            opacity: 0.6,
+            transform: "scale(1)",
           };
         case "right-1":
           return {
-            zIndex: 40,
-            width: baseSize * sideScale,
-            height: baseSize * sideScale,
-            top: centerY - (baseSize * sideScale) / 4 + verticalOffset,
-            left: centerX - (baseSize * sideScale) / 0.9 + level1Offset,
-            transform: "translate(0, 0)",
-            opacity: 1,
+            ...commonStyles,
+            top: centerY - (baseSize * scales.side) / 5 + verticalOffset,
+            left: centerX - baseSize * scales.side * 0.1 + level1Offset,
+            opacity: 0.8,
+            transform: "scale(1)",
           };
         case "right-2":
           return {
-            zIndex: 30,
-            width: baseSize * farSideScale,
-            height: baseSize * farSideScale,
-            top: centerY - (baseSize * farSideScale) / 10 + verticalOffset * 2,
-            left: centerX - (baseSize * farSideScale) / 0.8 + level2Offset,
-            transform: "translate(0, 0)",
-            opacity: 1,
+            ...commonStyles,
+            top:
+              centerY - (baseSize * scales.farSide) / 14 + verticalOffset * 8.5,
+            left: centerX + 2 + level2Offset,
+            opacity: 0.6,
+            transform: "scale(1)",
           };
-        default:
-          return {};
-      }
-    }
-  };
-
-  // Responsive animation variants
-  const getAnimationVariant = (position) => {
-    const isMobile = windowSize.width < 640;
-    const isTablet = windowSize.width >= 640 && windowSize.width < 1024;
-
-    if (isMobile) {
-      switch (position) {
-        case "center":
-          return { scale: [0.9, 1], opacity: [1, 1], rotate: 0 };
-        case "left-1":
-        case "right-1":
-          return { scale: [0.7, 0.7], opacity: [0.7, 0.7], rotate: 0 };
-        case "left-2":
-        case "right-2":
-          return { scale: [0.4, 0.4], opacity: [0.3, 0.3], rotate: 0 };
-        default:
-          return {};
-      }
-    } else if (isTablet) {
-      switch (position) {
-        case "center":
-          return { scale: [0.95, 1], opacity: [0.9, 1], rotate: 0 };
-        case "left-1":
-        case "right-1":
-          return { scale: [0.65, 0.75], opacity: [0.8, 0.9], rotate: 0 };
-        case "left-2":
-        case "right-2":
-          return { scale: [0.45, 0.55], opacity: [0.7, 0.8], rotate: 0 };
-        default:
-          return {};
-      }
-    } else {
-      switch (position) {
-        case "center":
-          return { scale: [0.9, 1], opacity: [1, 1], rotate: 0 };
-        case "left-1":
-        case "right-1":
-          return { scale: [0.8, 0.8], opacity: [0.9, 0.9], rotate: 0 };
-        case "left-2":
-        case "right-2":
-          return { scale: [0.7, 0.7], opacity: [0.8, 0.8], rotate: 0 };
         default:
           return {};
       }
@@ -356,161 +440,125 @@ export default function Quality() {
 
   const centerItem = getCenterItem();
 
-  // Handle swipe gestures for mobile
-  const handleSwipe = (event, info) => {
-    if (isAnimating) return;
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    setTouchStart(touch.clientX);
+  };
 
-    if (info.offset.x > 50) {
-      handleLeftClick();
-    } else if (info.offset.x < -50) {
-      handleRightClick();
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return;
+
+    const touch = e.changedTouches[0];
+    const diff = touchStart - touch.clientX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        handleRightClick();
+      } else {
+        handleLeftClick();
+      }
     }
+    setTouchStart(null);
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex flex-col">
-      <div
-        className="absolute inset-0 opacity-50 z-0 bg-cover bg-center bg-no-repeat sm:opacity-60 md:opacity-70 lg:opacity-80 xl:opacity-90 2xl:opacity-100"
-        style={{
-          backgroundImage: `url(${servicebg || "/placeholder.svg"})`,
-        }}
-      ></div>
-
-      <div className="absolute top-0 left-0 w-full text-center z-10 pointer-events-none px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
-        <h1 className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12 2xl:mt-16 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[100px] font-bold text-transparent bg-clip-text bg-black/20 opacity-50 tracking-widest sm:tracking-[0.1em] md:tracking-[0.15em] lg:tracking-[0.2em] xl:tracking-[0.25em] 2xl:tracking-[0.3em]">
+    <div className="relative w-full min-h-screen overflow-hidden">
+      <div className="absolute inset-0 opacity-50">
+        <div
+          className="absolute inset-0"
+          style={{ backgroundImage: `url(${servicebg})` }}
+        ></div>
+      </div>
+      <div className="absolute top-0 left-0 w-full text-center z-10 pointer-events-none px-4">
+        <h1 className="mt-8 md:mt-12 lg:mt-16 xl:mt-20 text-4xl md:text-6xl lg:text-8xl xl:text-8xl font-bold text-gray-200 tracking-widest select-none">
           QUALITY IS OUR RECIPE
         </h1>
       </div>
-
-      <motion.div
-        className="relative w-full h-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto flex justify-center items-center sm:items-start md:items-center lg:items-end xl:items-center 2xl:items-center"
-        onPan={handleSwipe}
+      <div
+        className="relative w-full h-screen flex justify-center items-center"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {items.map((item) => (
-          <motion.div
+          <div
             key={item.id}
-            className="absolute rounded-full overflow-hidden shadow-md sm:shadow-lg md:shadow-xl lg:shadow-2xl xl:shadow-3xl 2xl:shadow-4xl z-10 sm:z-20 md:z-30 lg:z-40 xl:z-50 2xl:z-60"
+            className="absolute rounded-full overflow-hidden shadow-2xl border-4 border-white hover:shadow-3xl cursor-pointer"
             style={getItemStyle(item.position)}
-            animate={getAnimationVariant(item.position)}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 20,
-              duration: 0.5,
+            onClick={() => {
+              if (item.position !== "center" && !isAnimating) {
+                if (item.position.includes("right")) {
+                  handleRightClick();
+                } else {
+                  handleLeftClick();
+                }
+              }
             }}
           >
             <img
-              src={item.image || "/placeholder.svg"}
+              src={item.image}
               alt={item.name}
-              className="w-full h-full object-cover rounded-full sm:object-contain md:object-cover lg:object-contain xl:object-cover 2xl:object-contain"
+              className="w-full h-full object-cover"
             />
-          </motion.div>
+            <div className="absolute inset-0 hover:bg-opacity-10 transition-all duration-300"></div>
+          </div>
         ))}
-
         {centerItem && (
-          <motion.div
-            className="absolute z-40 bg-white rounded-3xl p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 2xl:p-12 
-    flex flex-col justify-center items-center text-center shadow-lg sm:shadow-xl md:shadow-2xl 
-    lg:shadow-3xl xl:shadow-4xl 2xl:shadow-5xl 
-    top-[70%] md:top-[45%] lg:top-[50%] xl:top-[55%] 2xl:top-[60%] 
-    left-1/2 md:left-[30%] lg:left-[35%] xl:left-[40%] 2xl:left-[45%]
-    w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] 2xl:w-[30%]
-    max-w-[400px] min-h-[300px] md:min-h-[340px] lg:min-h-[360px] xl:min-h-[380px] 2xl:min-h-[400px]
-    transform -translate-x-1/2 -translate-y-1/2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-[#101a24] mb-2 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6 2xl:mb-8">
+          <div className="absolute z-40 bg-white rounded-2xl p-6 md:p-8 xl:p-10 flex flex-col justify-center items-center text-center shadow-xl border-2 border-gray-100 top-[52%] md:top-[61%] lg:top-[55%] xl:top-[55%] left-1/2 w-[60%] md:w-[30%] lg:w-[30%] xl:w-[25%] max-w-[500px] min-h-[300px] md:h-[230px] lg:h-[40%] xl:h-[280px] transform -translate-x-1/2 transition-all duration-300">
+            <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4">
               {centerItem.name}
             </h2>
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-[#0d0d25] italic px-2 sm:px-3 md:px-4 lg:px-5 xl:px-6 2xl:px-8">
+            <p className="text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 italic leading-relaxed">
               "{centerItem.description}"
             </p>
-          </motion.div>
+          </div>
         )}
-
-        <div className="absolute bottom-10 sm:bottom-10 md:bottom-8 lg:bottom-10 xl:bottom-12 2xl:bottom-16 left-0 right-0 flex justify-between sm:justify-center md:justify-between lg:justify-center xl:justify-between 2xl:justify-center sm:space-x-16 md:space-x-20 lg:space-x-24 xl:space-x-28 2xl:space-x-32 z-50 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
+        <div className="absolute bottom-15 md:bottom-12 lg:bottom-16 xl:bottom-20 left-3 md:left-50 lg:left-70 xl:left-[480px] right-3 md:right-50 lg:right-70 xl:right-[480px] z-50 px-4">
           <button
             onClick={handleLeftClick}
-            className="absolute bottom-60 sm:bottom-10 md:bottom-12 lg:bottom-10 xl:bottom-8 2xl:bottom-6 left-2 sm:left-4 md:left-6 lg:left-8 xl:left-10 2xl:left-12 bg-[#0079bf] text-white w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 2xl:w-18 2xl:h-18 rounded-full flex items-center justify-center hover:bg-[#006aa3] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0079bf] z-50"
+            className="absolute bottom-0 left-0 bg-[#0079bf] text-white w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 active:scale-95 2xl:w-15 2xl:h-15"
             disabled={isAnimating}
             aria-label="Previous item"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="24"
+              height="24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-6 h-6 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 2xl:w-9 2xl:h-9"
+              className="w-6 h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8  2xl:w-6 2xl:h-7"
             >
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
           </button>
-
           <button
             onClick={handleRightClick}
-            className="absolute bottom-60 sm:bottom-10 md:bottom-12 lg:bottom-10 xl:bottom-8 2xl:bottom-6 right-2 sm:right-4 md:right-6 lg:right-8 xl:right-10 2xl:right-12 bg-[#0079bf] text-white w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 2xl:w-18 2xl:h-18 rounded-full flex items-center justify-center hover:bg-[#006aa3] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0079bf] z-50"
+            className="absolute bottom-0 right-0 bg-[#0079bf] text-white w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 active:scale-95 2xl:w-15 2xl:h-15"
             disabled={isAnimating}
             aria-label="Next item"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="24"
+              height="24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-6 h-6 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 2xl:w-9 2xl:h-9"
+              className="w-6 h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 2xl:w-6 2xl:h-7"
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </div>
-      </motion.div>
-
+      </div>
       <style jsx>{`
-        @keyframes float-diagonal {
-          0%,
-          100% {
-            transform: translate(0, 0);
-          }
-          50% {
-            transform: translate(5px, 5px);
-          }
-        }
-
-        .custom-float {
-          animation: float-diagonal 3s ease-in-out infinite;
-        }
-
-        @media (max-width: 639px) {
+        @media (max-width: 640px) {
           .absolute.rounded-full {
-            transition: all 0.5s ease-in-out;
-          }
-        }
-
-        @media (min-width: 640px) and (max-width: 767px) {
-          .absolute.rounded-full {
-            transition: all 0.5s ease-in-out;
-          }
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .absolute.rounded-full {
-            transition: all 0.5s ease-in-out;
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .absolute.rounded-full {
-            transition: all 0.5s ease-in-out;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           }
         }
       `}</style>

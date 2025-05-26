@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import { ArrowUp, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import f1 from "../assets/f1.svg";
-import f2 from "../assets/f2.svg";
-import f3 from "../assets/f3.svg";
-import f4 from "../assets/f4.svg";
-import f5 from "../assets/f5.svg";
-import f6 from "../assets/f6.svg";
-import contactusbg from "../assets/contactusbg.svg";
+// import f1 from "../assets/f1.svg";
+// import f2 from "../assets/f2.svg";
+// import f3 from "../assets/f3.svg";
+// import f4 from "../assets/f4.svg";
+// import f5 from "../assets/f5.svg";
+// import f6 from "../assets/f6.svg";
+import contactusbg from "../assets/contactusbg.jpg";
 import logo from "../assets/logo.svg";
 import ice from "../assets/ice.svg";
 import fleaf from "../assets/fleaf.png";
@@ -40,7 +40,7 @@ const ScrollToTopButton = () => {
 
   return (
     <div
-      className={`fixed hidden md:block bottom-26 right-24 z-50 transition-opacity duration-300 ${
+      className={`fixed hidden md:block bottom-26 right-15 z-50 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
@@ -82,7 +82,7 @@ const Footer = () => {
     setEmail("");
   };
 
-  const images = [f1, f2, f3, f4, f5, f6];
+  // const images = [f1, f2, f3, f4, f5, f6];
   const navLinks = ["Home", "Service", "Menu", "Gallery"];
 
   return (
@@ -301,7 +301,7 @@ const Footer = () => {
                     <li className="flex items-start">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-gray-600 top-1 left-0"
+                        className="h-5 w-5 text-gray-600 top-1 left-0 min-w-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -315,7 +315,7 @@ const Footer = () => {
                       </svg>
                       <a
                         href="mailto:radha.caterers2016@Gmail.com"
-                        className="text-gray-600 md:pl-2 pl-0.5"
+                        className="text-gray-600 md:pl-2 pl-0.5 flex"
                       >
                         radha.caterers2016@Gmail.com
                       </a>
@@ -366,7 +366,11 @@ const Footer = () => {
                         className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         aria-label="Facebook"
                       >
-                        <img src={fb} className="size-4" alt="Facebook icon" />
+                        <img
+                          src={fb}
+                          className="size-4 min-w-4"
+                          alt="Facebook icon"
+                        />
                       </a>
                       <a
                         href="https://www.instagram.com/radhacaterers?igsh=MXc0bzlqZ3E4Y25jMQ=="
@@ -377,7 +381,7 @@ const Footer = () => {
                       >
                         <img
                           src={insta}
-                          className="size-4"
+                          className="size-4 min-w-4"
                           alt="Instagram icon"
                         />
                       </a>
@@ -390,7 +394,7 @@ const Footer = () => {
                       >
                         <img
                           src={whats}
-                          className="size-4"
+                          className="size-4 min-w-4"
                           alt="WhatsApp icon"
                         />
                       </a>
@@ -401,7 +405,11 @@ const Footer = () => {
                         className="bg-[#0079bf] text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
                         aria-label="Youtube"
                       >
-                        <img src={yt} className="size-4" alt="Youtube icon" />
+                        <img
+                          src={yt}
+                          className="size-4 min-w-4"
+                          alt="Youtube icon"
+                        />
                       </a>
                       <a
                         href="https://www.linkedin.com/in/shailesh-godhani-85ba671b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
@@ -412,7 +420,7 @@ const Footer = () => {
                       >
                         <img
                           src={linkedin}
-                          className="size-4"
+                          className="size-4 min-w-4"
                           alt="Linkedin icon"
                         />
                       </a>

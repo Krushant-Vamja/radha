@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import servicebg from "../assets/servicebg.svg";
+import servicebg from "../assets/servicebg.jpg";
 import s1 from "../assets/s1.svg";
 import s2 from "../assets/s2.svg";
 import s3 from "../assets/s3.svg";
@@ -130,7 +130,7 @@ const Services = () => {
 
   return (
     <section id="service">
-      <div className="relative py-16 px-4 overflow-hidden">
+      <div className="relative py-16 overflow-hidden">
         {/* Background pattern */}
         <div
           className="absolute inset-0 opacity-50 z-0"
@@ -164,9 +164,9 @@ const Services = () => {
           />
         </div>
 
-        <div className="container mx-auto relative z-20">
+        <div className=" flex flex-col justify-center items-center relative z-20 w-full">
           {/* Section header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 px-4">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Our Services
             </h2>
@@ -179,10 +179,10 @@ const Services = () => {
           </div>
 
           {/* Services cards */}
-          <div className="relative">
+          <div className="relative w-full">
             <div
               ref={scrollContainerRef}
-              className="flex md:grid overflow-x-auto scrollbar-hide grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 sm:p-10"
+              className="flex md:grid overflow-x-auto w-full scrollbar-hide grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 sm:p-10"
             >
               {displayServices.map((service, index) => (
                 <div

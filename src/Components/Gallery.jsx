@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import peppers from "../assets/peppers.svg";
 import gallery from "../assets/gallery.jpg";
-import servicebg from "../assets/servicebg.svg";
+import servicebg from "../assets/servicebg.jpg";
 
 export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false);
@@ -35,24 +35,22 @@ export default function Gallery() {
         </div>
 
         <div
-          className={`container ${
-            isMobile ? "mx-auto px-4" : "mx-25 px-4"
-          } py-16`}
+          className={`container ${isMobile ? "mx-auto px-4" : "mx-auto"} py-16`}
         >
           <div
-            className={`relative flex ${
+            className={`relative flex w-full md:px-15 ${
               isMobile ? "flex-col items-center" : "md:flex-row md:items-center"
             } justify-center`}
           >
             {/* Left side content */}
-            <div className="md:w-1/3 z-10 order-2 md:order-1 text-center md:text-left md:pr-8">
+            <div className="md:w-1/2 z-10 order-2 md:order-1 text-center md:text-left md:pr-8">
               <div className="flex items-center justify-center md:justify-start mb-6">
                 <img
                   src={peppers}
                   alt="Vegetable splash"
                   width={200}
                   height={200}
-                  className="right-335 -top-15 absolute custom-float"
+                  className="-left-10 -top-15 absolute custom-float md:block hidden"
                 />
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 z-10">
                   Our Gallery
@@ -71,12 +69,12 @@ export default function Gallery() {
             </div>
 
             {/* Right side single image */}
-            <div className="md:w-2/3 z-10 order-1 md:order-2 mb-8 md:mb-0">
-              <div className="relative md:h-auto md:mr-10 overflow-hidden">
+            <div className="md:w-1/2 z-10 order-1 md:order-2 mb-8 md:mb-0">
+              <div className="relative md:h-full overflow-hidden">
                 <img
                   src={gallery}
                   alt="Gallery showcase"
-                  className="object-contain w-full h-auto rounded-[50px]"
+                  className="object-fill w-full h-full rounded-[50px]"
                 />
               </div>
             </div>

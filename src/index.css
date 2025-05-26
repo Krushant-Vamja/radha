@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/autoplay';
+
 
 @theme {
   --breakpoint-xs: 325px;    /* Extra small devices */
@@ -117,4 +122,3 @@ img {
   user-select: none;
   pointer-events: none;
 }
-

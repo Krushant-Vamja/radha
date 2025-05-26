@@ -9,7 +9,7 @@ import punjabiFood from "../assets/punjabiFood.svg";
 import kathiyawadiFood from "../assets/kathiyawadiFood.svg";
 import broccoli from "../assets/broccoli.svg";
 import spoonNoodles from "../assets/spoonNoodles.svg";
-import servicebg from "../assets/servicebg.svg";
+import servicebg from "../assets/servicebg.jpg";
 import northindian from "../assets/northindian.svg";
 import chaat from "../assets/chaat.svg";
 import dessert from "../assets/dessert.svg";

@@ -1,42 +1,39 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import bookEventBg from "../assets/bookeventbg.svg"; // adjust path as needed
-import bell from "../assets/bell.svg"; // adjust path as needed
-import broccoli from "../assets/broccoli.svg"; // adjust path as needed
-import roll from "../assets/roll.svg"; // adjust path as needed
-import glass from "../assets/glass.svg"; // adjust path as needed
-import leaf1 from "../assets/leaf1.svg"; // adjust path as needed
-import star from "../assets/star.svg"; // adjust path as needed
-import c1 from "../assets/c1.svg"; // adjust path as needed
-import c2 from "../assets/c2.jpg"; // adjust path as needed
-import c3 from "../assets/c3.jpg"; // adjust path as needed
+import bookEventBg from "../assets/bookeventbg.jpg";
+import bell from "../assets/bell.svg";
+import broccoli from "../assets/broccoli.svg";
+import roll from "../assets/roll.svg";
+import glass from "../assets/glass.svg";
+import leaf1 from "../assets/leaf1.svg";
+import star from "../assets/star.svg";
+import c1 from "../assets/c1.svg";
+import c2 from "../assets/c2.jpg";
+import c3 from "../assets/c3.jpg";
 import { X, ChevronDown } from "lucide-react";
 
 const Community = () => {
   const slideContainerRef = useRef(null);
   const communitySliderRef = useRef(null);
+  const cardScrollContainerRef = useRef(null); // Ref for communityCards scroll container
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [eventType, setEventType] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [popupVisible, setPopupVisible] = useState(false);
   const [animatePopup, setAnimatePopup] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 640 : false
+  );
+  const [isTouching, setIsTouching] = useState(false);
+  const animationFrameRef = useRef(null);
 
-  // Hindu community slides - This was missing in the original code
+  // Hindu community slides
   const hinduCommunitySlides = [
-    {
-      image: c1,
-      id: 1,
-    },
-    {
-      image: c2,
-      id: 2,
-    },
-    {
-      image: c3,
-      id: 3,
-    },
+    { image: c1, id: 1 },
+    { image: c2, id: 2 },
+    { image: c3, id: 3 },
   ];
 
   // Regular community content slides
@@ -55,7 +52,6 @@ const Community = () => {
       ],
       bgColor: "#0079BF",
       headerText: "HINDU COMM",
-      // rightSpacing: "right-10", // ✅ Custom spacing class
     },
     {
       id: 2,
@@ -71,12 +67,10 @@ const Community = () => {
       ],
       bgColor: "#0079BF",
       headerText: "GENERAL COMM",
-      // rightSpacing: "-right-20", // ✅ Tailwind spacing class
     },
-
     {
       id: 3,
-      image: c3, // Using the same image, replace with different one if needed
+      image: c3,
       title: "Global Flavors",
       description: "Professional catering solutions for business events.",
       items: [
@@ -87,15 +81,8 @@ const Community = () => {
       ],
       bgColor: "#0079BF",
       headerText: "CORPORATE COMM",
-      // rightSpacing: "right-10", // ✅ Custom spacing class
     },
   ];
-
-  const [slides, setSlides] = useState([...hinduCommunitySlides]);
-  const [communitySlides, setCommunitySlides] = useState([
-    ...regularCommunitySlides,
-    ...regularCommunitySlides,
-  ]);
 
   // Community cards data
   const communityCards = [
@@ -136,28 +123,31 @@ const Community = () => {
     },
   ];
 
-  // Animation for the circular text (right to left)
+  const [slides, setSlides] = useState([...hinduCommunitySlides]);
+  const [communitySlides, setCommunitySlides] = useState([
+    ...regularCommunitySlides,
+    ...regularCommunitySlides,
+  ]);
+
+  // Animation for the circular text
   useEffect(() => {
     const rotationElements = document.querySelectorAll(".circular-text");
     if (!rotationElements.length) return;
 
     let position = 0;
-    const speed = 0.2; // Reduced speed for smoother animation
+    const speed = 0.2;
     let lastTimestamp = 0;
 
     const animate = (timestamp) => {
-      // Calculate time difference to ensure consistent animation speed
       if (!lastTimestamp) lastTimestamp = timestamp;
       const delta = timestamp - lastTimestamp;
       lastTimestamp = timestamp;
 
-      // Only update position if enough time has passed (helps reduce jitter)
       if (delta > 0) {
-        position += speed * (delta / 16); // Normalize to 60fps
+        position += speed * (delta / 16);
       }
 
       rotationElements.forEach((element) => {
-        // Use CSS transform with will-change for smoother animation
         element.style.transform = `rotate(${position}deg)`;
       });
 
@@ -171,73 +161,56 @@ const Community = () => {
     };
   }, []);
 
-  // Improved infinite loop animation for the slides
+  // Infinite loop animation for hindu community slides
   useEffect(() => {
     const slideContainer = slideContainerRef.current;
     if (!slideContainer) return;
 
-    // Create a duplicate set of slides for seamless looping
     setSlides([...hinduCommunitySlides, ...hinduCommunitySlides]);
 
     let animationId;
     let position = 0;
-    const speed = 0.5; // pixels per frame
+    const speed = 0.5;
     let lastTimestamp = 0;
     let slideWidth = 0;
 
-    // Function to reset position when we've scrolled through the first set of slides
     const resetPositionIfNeeded = () => {
       if (position >= slideWidth * hinduCommunitySlides.length) {
-        // When we've gone through all original slides, reset to beginning without animation
         position = 0;
         slideContainer.style.transition = "none";
         slideContainer.style.transform = `translateX(0px)`;
-
-        // Force reflow to apply the change immediately
         slideContainer.offsetHeight;
-
-        // Re-enable transition for the next movement
         slideContainer.style.transition = "transform 500ms linear";
       }
     };
 
     const animate = (timestamp) => {
-      // Get the current slide width (may change on resize)
       const slides = slideContainer.querySelectorAll(".hindu-slide");
       if (slides.length > 0) {
         slideWidth = slides[0].offsetWidth;
       }
 
-      // Calculate time difference to ensure consistent animation speed
       if (!lastTimestamp) lastTimestamp = timestamp;
       const delta = timestamp - lastTimestamp;
       lastTimestamp = timestamp;
 
-      // Only update position if enough time has passed
       if (delta > 0) {
-        position += speed * (delta / 16); // Normalize to 60fps
+        position += speed * (delta / 16);
       }
 
-      // Apply the transform
       slideContainer.style.transform = `translateX(-${position}px)`;
-
-      // Check if we need to reset position
       resetPositionIfNeeded();
 
       animationId = requestAnimationFrame(animate);
     };
 
-    // Start with transition enabled
     slideContainer.style.transition = "transform 500ms linear";
     animationId = requestAnimationFrame(animate);
 
-    // Handle window resize
     const handleResize = () => {
       const slides = slideContainer.querySelectorAll(".hindu-slide");
       if (slides.length > 0) {
         slideWidth = slides[0].offsetWidth;
-
-        // If we've already scrolled past the new width, reset
         if (position >= slideWidth * hinduCommunitySlides.length) {
           position = 0;
           slideContainer.style.transform = `translateX(0px)`;
@@ -260,64 +233,48 @@ const Community = () => {
 
     let animationId;
     let position = 0;
-    const speed = 0.5; // pixels per frame - slower for smoother scrolling
+    const speed = 0.5;
     let lastTimestamp = 0;
     let slideWidth = 0;
     const slideCount = regularCommunitySlides.length;
 
-    // Function to reset position when we've scrolled through the first set of slides
     const resetPositionIfNeeded = () => {
       if (position >= slideWidth * slideCount) {
-        // When we've gone through all original slides, reset to beginning without animation
         position = 0;
         sliderContainer.style.transition = "none";
         sliderContainer.style.transform = `translateX(0px)`;
-
-        // Force reflow to apply the change immediately
         sliderContainer.offsetHeight;
-
-        // Re-enable transition for the next movement
         sliderContainer.style.transition = "transform 1000ms linear";
       }
     };
 
     const animate = (timestamp) => {
-      // Get the current slide width (may change on resize)
       const slides = sliderContainer.querySelectorAll(".community-slide");
       if (slides.length > 0) {
         slideWidth = slides[0].offsetWidth;
       }
 
-      // Calculate time difference to ensure consistent animation speed
       if (!lastTimestamp) lastTimestamp = timestamp;
       const delta = timestamp - lastTimestamp;
       lastTimestamp = timestamp;
 
-      // Only update position if enough time has passed
       if (delta > 0) {
-        position += speed * (delta / 16); // Normalize to 60fps
+        position += speed * (delta / 16);
       }
 
-      // Apply the transform with cubic-bezier for smoother motion
       sliderContainer.style.transform = `translateX(-${position}px)`;
-
-      // Check if we need to reset position
       resetPositionIfNeeded();
 
       animationId = requestAnimationFrame(animate);
     };
 
-    // Start with transition enabled - longer duration for smoother appearance
     sliderContainer.style.transition = "transform 1000ms linear";
     animationId = requestAnimationFrame(animate);
 
-    // Handle window resize
     const handleResize = () => {
       const slides = sliderContainer.querySelectorAll(".community-slide");
       if (slides.length > 0) {
         slideWidth = slides[0].offsetWidth;
-
-        // If we've already scrolled past the new width, reset
         if (position >= slideWidth * slideCount) {
           position = 0;
           sliderContainer.style.transform = `translateX(0px)`;
@@ -333,14 +290,53 @@ const Community = () => {
     };
   }, []);
 
+  // Auto-scroll for communityCards on mobile
+  useEffect(() => {
+    if (!isMobile || isTouching) return;
+
+    const scrollContainer = cardScrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const scrollWidth = scrollContainer.scrollWidth / 2; // Half because of cloned items
+    let scrollPosition = 0;
+
+    const scroll = () => {
+      scrollPosition += 1; // Adjust speed as needed
+      if (scrollPosition >= scrollWidth) {
+        scrollPosition = 0;
+        scrollContainer.scrollLeft = 0;
+      }
+      scrollContainer.scrollLeft = scrollPosition;
+      animationFrameRef.current = requestAnimationFrame(scroll);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(scroll);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isMobile, isTouching]);
+
+  // Mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Handle popup visibility
   useEffect(() => {
     if (isPopupOpen) {
       setPopupVisible(true);
-      setTimeout(() => setAnimatePopup(true), 0); // Trigger animation after popup is visible
+      setTimeout(() => setAnimatePopup(true), 0);
     } else {
       setAnimatePopup(false);
-      setTimeout(() => setPopupVisible(false), 500); // Matches animation duration
+      setTimeout(() => setPopupVisible(false), 500);
     }
   }, [isPopupOpen]);
 
@@ -358,6 +354,17 @@ const Community = () => {
     };
   }, []);
 
+  const handleTouchStart = () => {
+    setIsTouching(true);
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsTouching(false);
+  };
+
   // Event types
   const eventTypes = ["Wedding", "Corporate Event", "Birthday Party", "Other"];
 
@@ -371,13 +378,12 @@ const Community = () => {
     <div className="relative overflow-hidden">
       {/* Top section with wavy border background image */}
       <div className="relative">
-        <div
-          className="w-full h-[400px] sm:h-[500px] md:h-[625px] bg-cover bg-center flex items-center justify-center text-center my-4"
-          style={{
-            backgroundImage: `url(${bookEventBg})`,
-            backgroundRepeat: "no-repeat",
-          }}
-        >
+        <div className="w-full h-[400px] sm:h-[500px] md:h-[625px] xl:w-[1200px] 2xl:w-[2560px] bg-cover bg-center flex items-center justify-center text-center my-4">
+          <img
+            src={bookEventBg}
+            alt=""
+            className="absolute top-0 left-0 h-[400px] sm:h-[500px] md:h-[625px] 2xl:w-[2560px] xl:h-full object-cover lg:object-contain"
+          />
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="relative mb-4">
               <img
@@ -389,11 +395,9 @@ const Community = () => {
                 }}
               />
             </div>
-
             <h2 className="text-white text-3xl font-bold mb-6 tracking-wider text-center">
               BOOK CATERING NOW
             </h2>
-
             <button
               className="bg-[#0079bf] hover:bg-blue-700 text-white px-6 py-2 rounded [border-top-left-radius:20px] [border-top-right-radius:5px] [border-bottom-left-radius:5px] [border-bottom-right-radius:20px] transition-colors"
               onClick={() => setIsPopupOpen(true)}
@@ -405,7 +409,7 @@ const Community = () => {
       </div>
 
       {/* Community Special section */}
-      <div className="md:mx-20 mx-5  py-12 relative">
+      <div className="md:mx-20 mx-5 py-12 relative">
         <img
           src={broccoli || "/placeholder.svg"}
           alt="Broccoli"
@@ -426,16 +430,37 @@ const Community = () => {
             customs.
           </p>
         </div>
-        <div className="relative grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div
+          ref={cardScrollContainerRef}
+          className={`relative ${
+            isMobile
+              ? "flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+              : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          }`}
+          style={
+            isMobile ? { scrollBehavior: "smooth", whiteSpace: "nowrap" } : {}
+          }
+          onTouchStart={isMobile ? handleTouchStart : undefined}
+          onTouchEnd={isMobile ? handleTouchEnd : undefined}
+        >
+          {/* Original Cards */}
           {communityCards.map((card, index) => (
             <div
-              key={index}
-              className="relative rounded-lg shadow-sm overflow-hidden z-10"
+              key={`original-${index}`}
+              className={`relative rounded-lg shadow-sm overflow-hidden z-10 ${
+                isMobile
+                  ? "inline-block snap-center mx-2 w-64 flex-shrink-0 m-2"
+                  : ""
+              }`}
             >
               <div className="relative z-10 flex flex-col items-center justify-center text-center bg-white bg-opacity-90 p-4 rounded-lg">
                 <div className="mb-4">
-                  <span className="text-orange-400 ">
-                    <img src={star} className="h-auto w-10 md:w-15" />
+                  <span className="text-orange-400">
+                    <img
+                      src={star}
+                      alt="Star"
+                      className="h-auto w-10 md:w-15"
+                    />
                   </span>
                 </div>
                 <h3 className="font-semibold text-lg mb-4">{card.name}</h3>
@@ -445,7 +470,6 @@ const Community = () => {
                       key={idx}
                       className="flex items-center justify-center text-gray-700"
                     >
-                      {/* <span className="mr-2 text-gray-500">•</span> */}
                       {item}
                     </li>
                   ))}
@@ -453,6 +477,37 @@ const Community = () => {
               </div>
             </div>
           ))}
+          {/* Cloned Cards for Seamless Loop (Mobile Only) */}
+          {isMobile &&
+            communityCards.map((card, index) => (
+              <div
+                key={`clone-${index}`}
+                className="relative rounded-lg shadow-sm overflow-hidden z-10 inline-block snap-center mx-2 w-64 flex-shrink-0"
+              >
+                <div className="relative z-10 flex flex-col items-center justify-center text-center bg-white bg-opacity-90 p-4 rounded-lg">
+                  <div className="mb-4">
+                    <span className="text-orange-400">
+                      <img
+                        src={star}
+                        alt="Star"
+                        className="h-auto w-10 md:w-15"
+                      />
+                    </span>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-4">{card.name}</h3>
+                  <ul className="space-y-2">
+                    {card.items.map((item, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-center justify-center text-gray-700"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
           <img
             src={glass || "/placeholder.svg"}
             alt="Juice"
@@ -462,7 +517,7 @@ const Community = () => {
       </div>
 
       {/* Regular Community section */}
-      <div className="container mx-auto relative">
+      <div className="w-full mx-auto relative">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Regular Community
@@ -471,8 +526,6 @@ const Community = () => {
             Serving diverse communities with customized catering experiences.
           </p>
         </div>
-
-        {/* Hindu Community Slides - This section was missing in the render */}
 
         {/* Horizontal scrolling community slides */}
         <div className="w-full overflow-hidden">
@@ -487,7 +540,6 @@ const Community = () => {
                   key={`community-slide-${slide.id}-${index}`}
                   className="community-slide flex-shrink-0 w-full flex flex-col md:flex-row"
                 >
-                  {/* Left part - Image */}
                   <div className="w-full md:w-1/2">
                     <img
                       src={slide.image || "/placeholder.svg"}
@@ -495,24 +547,17 @@ const Community = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-
-                  {/* Right part - Content */}
                   <div
-                    className="w-full md:w-1/2 flex flex-col h-full justify-center relative md:pl-20 px-6 py-16 overflow-hidden"
+                    className="w-full md:w-1/2 flex flex-col h-full justify-center relative md:pl-5 lg:pl-10 2xl:pl-20 px-6 py-16 overflow-hidden"
                     style={{ backgroundColor: slide.bgColor }}
                   >
-                    {/* Low opacity header - Removed hidden class */}
-                    <div
-                      className={`absolute top-0 text-[100px] font-bold text-white opacity-10 select-none whitespace-nowrap hidden md:block `}
-                    >
+                    <div className="absolute top-0 text-[100px] md:text-[50px] xl:text-[90px] 2xl:text-[140px] font-bold text-white opacity-10 select-none whitespace-nowrap hidden md:block">
                       {slide.headerText}
                     </div>
-
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
                       {slide.title}
                     </h2>
                     <p className="text-white mb-6">{slide.description}</p>
-
                     <ul className="space-y-4 text-white">
                       {slide.items.map((item, idx) => (
                         <li key={idx} className="flex items-start">
@@ -521,11 +566,8 @@ const Community = () => {
                         </li>
                       ))}
                     </ul>
-
-                    {/* Circular text with leaf */}
-                    <div className="absolute bottom-0 right-0 w-30 h-30 md:w-60 md:h-60">
+                    <div className="absolute bottom-0 right-0 w-30 h-30 md:w-25 md:h-25">
                       <div className="w-full h-full relative">
-                        {/* Circular text - Animated - Fixed text content */}
                         <div
                           className="w-full h-full absolute inset-0 circular-text"
                           style={{ willChange: "transform" }}
@@ -538,7 +580,7 @@ const Community = () => {
                             />
                             <text
                               width="100%"
-                              className="text-white font-semibold "
+                              className="text-white font-semibold"
                               style={{ fontSize: "12px", letterSpacing: "2px" }}
                             >
                               <textPath
@@ -551,12 +593,11 @@ const Community = () => {
                             </text>
                           </svg>
                         </div>
-                        {/* Leaf image - Static */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <img
                             src={leaf1 || "/placeholder.svg"}
                             alt="Leaf"
-                            className="w-20 h-20 md:w-38 md:h-38 object-contain"
+                            className="w-20 h-20 md:w-15 md:h-15 object-contain"
                           />
                         </div>
                       </div>
@@ -586,7 +627,6 @@ const Community = () => {
             }
           }}
         >
-          {/* Close Button - Separate blue square with X */}
           <button
             className={`hidden md:block absolute top-[300px] left-254 bg-[#0079bf] text-white p-4 rounded-l-md hover:bg-[#0079bf]/90 transition-all duration-500 ease-in-out z-[60] ${
               animatePopup
@@ -597,8 +637,6 @@ const Community = () => {
           >
             <X size={24} />
           </button>
-
-          {/* Popup Form with animation */}
           <div
             className={`w-full h-100dvh max-w-md bg-white rounded-l-3xl shadow-xl transform transition-all duration-500 ease-in-out ${
               animatePopup
@@ -606,14 +644,12 @@ const Community = () => {
                 : "translate-x-full opacity-0"
             } relative`}
           >
-            {/* Mobile Close Button */}
             <button
               className="absolute top-4 right-4 text-gray-700 hover:text-gray-900 transition-colors z-[60] md:hidden"
               onClick={() => setIsPopupOpen(false)}
             >
               <X size={24} />
             </button>
-            {/* Form Content */}
             <div className="p-8 pt-12">
               <h2 className="text-3xl font-bold text-center text-[#101a24] mb-1">
                 Get in Touch
@@ -621,9 +657,7 @@ const Community = () => {
               <p className="text-center text-gray-600 mb-6">
                 Get in Touch with Us
               </p>
-
               <form className="space-y-6">
-                {/* Name Field */}
                 <div>
                   <label
                     htmlFor="name"
@@ -637,8 +671,6 @@ const Community = () => {
                     className="w-full p-3 rounded-[20px] bg-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-[#0079bf]"
                   />
                 </div>
-
-                {/* Email Field */}
                 <div>
                   <label
                     htmlFor="email"
@@ -652,8 +684,6 @@ const Community = () => {
                     className="w-full p-3 rounded-[20px] bg-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-[#0079bf]"
                   />
                 </div>
-
-                {/* Event Type Dropdown */}
                 <div className="relative" ref={dropdownRef}>
                   <label
                     htmlFor="eventType"
@@ -672,8 +702,6 @@ const Community = () => {
                     </span>
                     <ChevronDown size={20} className="text-gray-500" />
                   </div>
-
-                  {/* Dropdown Menu */}
                   {isDropdownOpen && (
                     <div className="absolute z-10 w-full mt-1 rounded-[20px] bg-[#E0E0E0] shadow-lg">
                       <div
@@ -704,8 +732,6 @@ const Community = () => {
                     </div>
                   )}
                 </div>
-
-                {/* Message Field */}
                 <div>
                   <label
                     htmlFor="message"
@@ -719,8 +745,6 @@ const Community = () => {
                     className="w-full p-3 rounded-[20px] bg-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-[#0079bf] resize-none"
                   ></textarea>
                 </div>
-
-                {/* Submit Button */}
                 <button
                   type="button"
                   className="w-full py-3 bg-[#0079bf] text-white font-medium rounded-[20px] hover:bg-[#0079bf]/90 transition-colors uppercase tracking-wide"
@@ -734,19 +758,25 @@ const Community = () => {
       )}
       <style>
         {`
-  @keyframes float-diagonal {
-    0%, 100% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(0px, 10px);
-    }
-  }
-
-  .custom-float {
-    animation: float-diagonal 3s ease-in-out infinite;
-  }
-`}
+          @keyframes float-diagonal {
+            0%, 100% {
+              transform: translate(0, 0);
+            }
+            50% {
+              transform: translate(0px, 10px);
+            }
+          }
+          .custom-float {
+            animation: float-diagonal 3s ease-in-out infinite;
+          }
+          .no-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}
       </style>
     </div>
   );
