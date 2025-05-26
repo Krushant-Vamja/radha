@@ -9,7 +9,7 @@ import Footer from "../Components/Footer";
 import Gallery from "../Components/Gallery";
 import Quality from "../Components/Quality";
 import Founder from "../Components/Founder";
-import Hero from "../Components/hero";
+import Hero from "../Components/Hero";
 
 const HomePage = () => {
   return (
