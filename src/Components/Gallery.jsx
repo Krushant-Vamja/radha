@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import peppers from "../assets/peppers.svg";
+import peppers from "../assets/peppers.png";
 import gallery from "../assets/gallery.jpg";
 import servicebg from "../assets/servicebg.jpg";
 

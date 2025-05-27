@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import italian from "../assets/italian.svg";
+import italian from "../assets/italian.png";
 import pizza1 from "../assets/pizza1.svg";
-import gujarati1 from "../assets/gujarati1.svg";
-import south from "../assets/south.svg";
-import punjabi from "../assets/punjabi.svg";
+import gujarati1 from "../assets/gujarati1.png";
+import south from "../assets/south.png";
+import punjabi from "../assets/punjabi.png";
 import servicebg from "../assets/servicebg.jpg";
 
 const foodItems = [

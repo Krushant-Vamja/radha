@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 // import f6 from "../assets/f6.svg";
 import contactusbg from "../assets/contactusbg.jpg";
 import logo from "../assets/logo.svg";
-import ice from "../assets/ice.svg";
+import ice from "../assets/ice.png";
 import fleaf from "../assets/fleaf.png";
 import fleaf1 from "../assets/fleaf1.png";
 import fb from "../assets/fb.svg";

@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import bookEventBg from "../assets/bookeventbg.jpg";
-import bell from "../assets/bell.svg";
-import broccoli from "../assets/broccoli.svg";
-import roll from "../assets/roll.svg";
-import glass from "../assets/glass.svg";
+import bell from "../assets/bell.png";
+import broccoli from "../assets/broccoli.png";
+import roll from "../assets/roll.png";
+import glass from "../assets/glass.png";
 import leaf1 from "../assets/leaf1.svg";
 import star from "../assets/star.svg";
-import c1 from "../assets/c1.svg";
+import c1 from "../assets/c1.jpg";
 import c2 from "../assets/c2.jpg";
 import c3 from "../assets/c3.jpg";
 import { X, ChevronDown } from "lucide-react";

@@ -3,16 +3,16 @@
 import { useEffect, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 
-import gujaratiFood from "../assets/gujaratiFood.svg";
-import southIndianFood from "../assets/southIndianFood.svg";
-import punjabiFood from "../assets/punjabiFood.svg";
-import kathiyawadiFood from "../assets/kathiyawadiFood.svg";
-import broccoli from "../assets/broccoli.svg";
-import spoonNoodles from "../assets/spoonNoodles.svg";
+import gujaratiFood from "../assets/gujaratiFood.png";
+import southIndianFood from "../assets/southIndianFood.png";
+import punjabiFood from "../assets/punjabiFood.png";
+import kathiyawadiFood from "../assets/kathiyawadiFood.png";
+import broccoli from "../assets/broccoli.png";
+import spoonNoodles from "../assets/spoonNoodles.png";
 import servicebg from "../assets/servicebg.jpg";
-import northindian from "../assets/northindian.svg";
-import chaat from "../assets/chaat.svg";
-import dessert from "../assets/dessert.svg";
+import northindian from "../assets/northindian.png";
+import chaat from "../assets/chaat.png";
+import dessert from "../assets/dessert.png";
 
 const Recipe = () => {
   const scrollRef = useRef(null);

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import onion from "../assets/onion.svg";
-import testleaf from "../assets/testleaf.svg";
-import tomato from "../assets/tomato.svg";
-import tomato2 from "../assets/tomato2.svg";
+import onion from "../assets/onion.png";
+import testleaf from "../assets/testleaf.png";
+import tomato from "../assets/tomato.png";
+import tomato2 from "../assets/tomato2.png";
 import coma1 from "../assets/coma1.svg";
 import coma2 from "../assets/coma2.svg";
 import p4 from "../assets/p4.svg";

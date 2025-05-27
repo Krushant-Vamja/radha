@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import broccoli1 from "../assets/broccoli1.svg";
-import testleaf from "../assets/testleaf.svg";
-import tomato2 from "../assets/tomato2.svg";
+import testleaf from "../assets/testleaf.png";
+import tomato2 from "../assets/tomato2.png";
 import p4 from "../assets/p4.svg";
 import p5 from "../assets/p5.svg";
 import p6 from "../assets/p6.svg";

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import herobg from "../assets/herobg.jpg";
-import mainimg from "../assets/mainimg.svg";
+import mainimg from "../assets/mainimg.png";
 import rotateingimg from "../assets/rotateingimg.png";
 import rightbottomleaf from "../assets/rightbottomleaf.svg";
 import mint from "../assets/mint.png";
