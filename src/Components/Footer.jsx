@@ -232,7 +232,7 @@ const Footer = () => {
                   <ul className="space-y-2">
                     <li>
                       <a
-                        href="#wedding"
+                        href="#service"
                         className="text-gray-600 hover:text-blue-600 transition-colors"
                       >
                         Wedding Catering
@@ -240,7 +240,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="#corporate"
+                        href="#service"
                         className="text-gray-600 hover:text-blue-600 transition-colors"
                       >
                         Corporate Events
@@ -248,7 +248,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="#birthday"
+                        href="#service"
                         className="text-gray-600 hover:text-blue-600 transition-colors"
                       >
                         Birthday Parties
@@ -256,7 +256,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="#social"
+                        href="#service"
                         className="text-gray-600 hover:text-blue-600 transition-colors"
                       >
                         Social Gatherings
