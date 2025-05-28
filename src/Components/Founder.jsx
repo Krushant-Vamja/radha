@@ -64,7 +64,7 @@ const Founder = () => {
           </div>
 
           {/* First Founder's Details */}
-          <div className=" flex flex-col justify-center">
+          <div className="space-y-4 flex flex-col justify-center">
             <h3 className="font-[Poppins] font-semibold text-3xl text-left text-[#2C2F24]">
               {founders[0].name}
             </h3>
