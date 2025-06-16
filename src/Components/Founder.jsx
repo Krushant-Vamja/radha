@@ -222,14 +222,14 @@ const Founder = () => {
             <img
               src={left}
               alt="Show Shailesh"
-              className={`w-6 h-6 transition-all ${
+              className={`w-6 h-6 transition-all rotate-90 ${
                 active === 0 ? "filter invert" : ""
               }`}
             />
           </button>
           <button
             onClick={() => setActive(1)}
-            className={`rounded-full p-3 transition-colors ${
+            className={`rounded-full p-3 transition-colors -rotate-90 ${
               active === 1 ? "bg-[#0079BF]" : "bg-[#E0E0E0]"
             }`}
           >

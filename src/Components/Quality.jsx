@@ -135,9 +135,9 @@ export default function Quality() {
   const getItemStyle = (position) => {
     const isMobile = windowSize.width < 768;
     const isTablet = windowSize.width >= 768 && windowSize.width < 1024;
-    const isDesktop = windowSize.width >= 1024 && windowSize.width < 1536;
-    const is2XL = windowSize.width >= 1536 && windowSize.width < 2560;
-    const isAbove4K = windowSize.width >= 2560;
+    const isDesktop = windowSize.width >= 1024 && windowSize.width < 1440;
+    const is2K = windowSize.width >= 1440 && windowSize.width <= 2560;
+    const isAbove4K = windowSize.width > 2560;
 
     if (isAbove4K) {
       console.log(
@@ -145,7 +145,10 @@ export default function Quality() {
       );
     }
 
-    const containerWidth = Math.min(windowSize.width, isAbove4K ? 2560 : 1400);
+    const containerWidth = Math.min(
+      windowSize.width,
+      isAbove4K ? 2560 : is2K ? 2560 : 1400
+    );
     const containerHeight = windowSize.height;
 
     const centerX = containerWidth / 2;
@@ -157,7 +160,7 @@ export default function Quality() {
       ? 160
       : isDesktop
       ? 200
-      : is2XL
+      : is2K
       ? 240
       : 280;
     const scales = {
@@ -167,17 +170,17 @@ export default function Quality() {
         ? 1.3
         : isDesktop
         ? 1.4
-        : is2XL
+        : is2K
         ? 1.5
         : 1.6,
-      side: isMobile ? 0.8 : isTablet ? 0.9 : isDesktop ? 1 : is2XL ? 1.1 : 1.2,
+      side: isMobile ? 0.8 : isTablet ? 0.9 : isDesktop ? 1 : is2K ? 1.1 : 1.2,
       farSide: isMobile
         ? 0.6
         : isTablet
         ? 0.7
         : isDesktop
         ? 0.8
-        : is2XL
+        : is2K
         ? 0.9
         : 1,
     };
@@ -188,7 +191,7 @@ export default function Quality() {
       ? containerWidth * 0.22
       : isDesktop
       ? containerWidth * 0.2
-      : is2XL
+      : is2K
       ? containerWidth * 0.3
       : containerWidth * 0.35;
     const level2Offset = isMobile
@@ -197,7 +200,7 @@ export default function Quality() {
       ? containerWidth * 0.35
       : isDesktop
       ? containerWidth * 0.32
-      : is2XL
+      : is2K
       ? containerWidth * 0.45
       : containerWidth * 0.5;
     const verticalOffset = isMobile
@@ -206,7 +209,7 @@ export default function Quality() {
       ? 20
       : isDesktop
       ? 30
-      : is2XL
+      : is2K
       ? 50
       : 60;
 
@@ -284,55 +287,53 @@ export default function Quality() {
         default:
           return {};
       }
-    } else if (is2XL) {
+    } else if (is2K) {
       switch (position) {
         case "center":
           return {
             ...commonStyles,
             top: centerY - (baseSize * scales.center) / 1.8,
-            left: centerX - (baseSize * scales.center) / 3,
+            left: centerX - (baseSize * scales.center) / 2,
             opacity: 1,
-            transform: "scale(0.65)",
+            transform: "scale(0.75)",
           };
         case "left-1":
           return {
             ...commonStyles,
-            top: centerY - (baseSize * scales.side) / 4 - lgVerticalOffset / 3,
-            left: centerX - baseSize * scales.side - lgLevel1Offset / 8,
+            top: centerY - (baseSize * scales.side) / 3 - lgVerticalOffset / 3,
+            left: centerX - baseSize * scales.side * 1.2 - lgLevel1Offset / 6,
             opacity: 0.9,
-            transform: "scale(0.6)",
+            transform: "scale(0.7)",
           };
         case "left-2":
           return {
             ...commonStyles,
             top:
               centerY -
-              (baseSize * scales.farSide) / 10 +
-              lgVerticalOffset * 1.5,
-            left:
-              centerX - (baseSize * scales.farSide) / 2 - lgLevel2Offset / 1.8,
+              (baseSize * scales.farSide) / 8 +
+              lgVerticalOffset * 1.8,
+            left: centerX - baseSize * scales.farSide - lgLevel2Offset / 2.5,
             opacity: 0.7,
-            transform: "scale(0.5)",
+            transform: "scale(0.6)",
           };
         case "right-1":
           return {
             ...commonStyles,
-            top: centerY - (baseSize * scales.side) / 4 - lgVerticalOffset / 3,
-            left: centerX + lgLevel1Offset / 2.1,
+            top: centerY - (baseSize * scales.side) / 3 - lgVerticalOffset / 2,
+            left: centerX + baseSize * scales.side * 0.1 + lgLevel1Offset / 4.5,
             opacity: 0.9,
-            transform: "scale(0.6)",
+            transform: "scale(0.7)",
           };
         case "right-2":
           return {
             ...commonStyles,
             top:
               centerY -
-              (baseSize * scales.farSide) / 10 +
-              lgVerticalOffset * 1.4,
-            left:
-              centerX + baseSize * scales.farSide * 0.5 + lgLevel2Offset / 2.6,
+              (baseSize * scales.farSide) / 8 +
+              lgVerticalOffset * 1.8,
+            left: centerX + baseSize * scales.farSide + lgLevel2Offset / 10,
             opacity: 0.7,
-            transform: "scale(0.5)",
+            transform: "scale(0.6)",
           };
         default:
           return {};
@@ -482,7 +483,7 @@ export default function Quality() {
         {items.map((item) => (
           <div
             key={item.id}
-            className="absolute rounded-full overflow-hidden shadow-2xl border-4 border-white hover:shadow-3xl cursor-pointer"
+            className="absolute rounded-full overflow-hidden shadow-2xl border-4 border-white hover:shadow-3xl"
             style={getItemStyle(item.position)}
             onClick={() => {
               if (item.position !== "center" && !isAnimating) {
@@ -499,11 +500,11 @@ export default function Quality() {
               alt={item.name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 hover:bg-opacity-10 transition-all duration-300"></div>
+            {/* <div className="absolute inset-0 hover:bg-opacity-10 transition-all duration-300"></div> */}
           </div>
         ))}
         {centerItem && (
-          <div className="absolute z-40 bg-white rounded-2xl p-6 md:p-8 xl:p-10 flex flex-col justify-center items-center text-center shadow-xl border-2 border-gray-100 top-[52%] md:top-[61%] lg:top-[55%] xl:top-[55%] left-1/2 w-[60%] md:w-[30%] lg:w-[30%] xl:w-[25%] max-w-[500px] min-h-[300px] md:h-[230px] lg:h-[40%] xl:h-[280px] transform -translate-x-1/2 transition-all duration-300">
+          <div className="absolute z-40 bg-white rounded-2xl p-6 md:p-8 xl:p-10 flex flex-col justify-center items-center text-center shadow-xl border-2 border-gray-100 top-[58%] md:top-[61%] lg:top-[58%] xl:top-[55%] left-1/2 w-[60%] md:w-[30%] lg:w-[30%] xl:w-[25%] max-w-[500px] min-h-[200px] md:h-[230px] lg:h-[25%] xl:h-[280px] transform -translate-x-1/2 transition-all duration-300">
             <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4">
               {centerItem.name}
             </h2>
@@ -528,7 +529,7 @@ export default function Quality() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-6 h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8  2xl:w-6 2xl:h-7"
+              className="w-6 h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 2xl:w-6 2xl:h-7"
             >
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>

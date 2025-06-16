@@ -6,6 +6,7 @@ import p4 from "../assets/p4.svg";
 import p5 from "../assets/p5.svg";
 import p6 from "../assets/p6.svg";
 import p7 from "../assets/p7.svg";
+import familydinner from "../assets/familydinner.jpg";
 
 // Temporary Google link
 const REVIEWS_PAGE_URL = "https://g.page/RADHA-EVENTS/review?gm";
@@ -65,11 +66,11 @@ const MoreReview = () => {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full bg-white overflow-hidden">
       {/* Hero Image with Gradient Overlay */}
       <div className="relative w-full h-[300px] md:h-[400px]">
         <img
-          src="/elegant-dining-celebration.png"
+          src={familydinner}
           alt="Customer dining experience"
           className="absolute inset-0 w-full h-full object-cover"
         />

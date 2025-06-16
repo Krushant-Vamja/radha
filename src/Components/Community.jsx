@@ -297,14 +297,16 @@ const Community = () => {
     const scrollContainer = cardScrollContainerRef.current;
     if (!scrollContainer) return;
 
-    const scrollWidth = scrollContainer.scrollWidth / 2; // Half because of cloned items
-    let scrollPosition = 0;
+    const originalWidth = scrollContainer.scrollWidth / 4; // Divide by 4 because of triple cloning
+    let scrollPosition = scrollContainer.scrollLeft || 0; // Preserve current position
+    const speed = 1; // Adjust speed as needed
 
     const scroll = () => {
-      scrollPosition += 1; // Adjust speed as needed
-      if (scrollPosition >= scrollWidth) {
-        scrollPosition = 0;
-        scrollContainer.scrollLeft = 0;
+      scrollPosition += speed;
+      if (scrollPosition >= originalWidth * 3) {
+        // When reaching the end of the third clone, reset to the start of the original cards
+        scrollPosition = originalWidth; // Jump to the start of the original cards (after first clone)
+        scrollContainer.scrollLeft = scrollPosition;
       }
       scrollContainer.scrollLeft = scrollPosition;
       animationFrameRef.current = requestAnimationFrame(scroll);
@@ -479,7 +481,15 @@ const Community = () => {
           ))}
           {/* Cloned Cards for Seamless Loop (Mobile Only) */}
           {isMobile &&
-            communityCards.map((card, index) => (
+            [
+              ...communityCards,
+              ...communityCards,
+              ...communityCards,
+              ...communityCards,
+              ...communityCards,
+              ...communityCards,
+              ...communityCards,
+            ].map((card, index) => (
               <div
                 key={`clone-${index}`}
                 className="relative rounded-lg shadow-sm overflow-hidden z-10 inline-block snap-center mx-2 w-64 flex-shrink-0"
