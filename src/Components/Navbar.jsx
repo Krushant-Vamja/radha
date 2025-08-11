@@ -230,7 +230,7 @@ const Navbar = () => {
           }}
         >
           {/* Close Button - Separate blue square with X */}
-          <button
+          {/* <button
             className={`hidden md:block absolute top-[300px] left-254 bg-[#0079bf] text-white p-4 rounded-l-md hover:bg-[#0079bf]/90 transition-all duration-500 ease-in-out z-[60] ${
               animatePopup
                 ? "translate-x-0 opacity-100"
@@ -239,7 +239,7 @@ const Navbar = () => {
             onClick={() => setIsPopupOpen(false)}
           >
             <X size={24} />
-          </button>
+          </button> */}
 
           {/* Popup Form with animation */}
           <div
@@ -257,7 +257,7 @@ const Navbar = () => {
               <X size={24} />
             </button>
             {/* Form Content */}
-            <div className="p-8 pt-12">
+            <div className="p-8">
               <h2 className="text-3xl font-bold text-center text-[#101a24] mb-1">
                 Get in Touch
               </h2>

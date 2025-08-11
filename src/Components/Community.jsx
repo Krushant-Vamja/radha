@@ -401,7 +401,7 @@ const Community = () => {
               BOOK CATERING NOW
             </h2>
             <button
-              className="bg-[#0079bf] hover:bg-blue-700 text-white px-6 py-2 rounded [border-top-left-radius:20px] [border-top-right-radius:5px] [border-bottom-left-radius:5px] [border-bottom-right-radius:20px] transition-colors"
+              className="bg-[#0079bf] hover:bg-[#0079bf]/90 text-white px-6 py-2 rounded [border-top-left-radius:20px] [border-top-right-radius:5px] [border-bottom-left-radius:5px] [border-bottom-right-radius:20px] transition-colors"
               onClick={() => setIsPopupOpen(true)}
             >
               Book your Event
@@ -637,7 +637,7 @@ const Community = () => {
             }
           }}
         >
-          <button
+          {/* <button
             className={`hidden md:block absolute top-[300px] left-254 bg-[#0079bf] text-white p-4 rounded-l-md hover:bg-[#0079bf]/90 transition-all duration-500 ease-in-out z-[60] ${
               animatePopup
                 ? "translate-x-0 opacity-100"
@@ -646,7 +646,7 @@ const Community = () => {
             onClick={() => setIsPopupOpen(false)}
           >
             <X size={24} />
-          </button>
+          </button> */}
           <div
             className={`w-full h-100dvh max-w-md bg-white rounded-l-3xl shadow-xl transform transition-all duration-500 ease-in-out ${
               animatePopup
@@ -660,7 +660,7 @@ const Community = () => {
             >
               <X size={24} />
             </button>
-            <div className="p-8 pt-12">
+            <div className="p-8">
               <h2 className="text-3xl font-bold text-center text-[#101a24] mb-1">
                 Get in Touch
               </h2>
